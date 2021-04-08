@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:17:23 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/08 09:33:25 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/08 09:57:37 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	check_file_extension(const char *file)
 	char	*extension;
 
 	extension = ft_strrchr(file, '.');
-	if (extension && !ft_strncmp(extension, ".rt", 3))
+	if (extension && !ft_strncmp(extension, ".rt", 4))
 		return (true);
 	print_scene_error(SCENE_EXT, NULL, 0);
 	return (false);

@@ -6,39 +6,46 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/03/23 14:33:03 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/08 09:47:22 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 
-SRC		= minirt.c
+SRC		= minirt.c minirt_scene.c minirt_error.c
 
 OBJ		= $(SRC:.c=.o)
 
-LIBFT	= ./libft
+LIBFT	= ./libft/
 
 MLX		= ./mlx-linux
 
 CC		= clang
 
-CFLAGS	= -Wall -Werror -Wextra -O3
+CFLAGS	= -Wall -Werror -Wextra
+
+DEBUG	= -fsanitize=address -g3
 
 INCLUDE	= -I./includes/
 
-LINK	= -L$(LIBFT) -L$(MLX)
+LIBS	= -L$(LIBFT) -L$(MLX)
 
-LIBS	= -lXext -lX11 -lmlx
+LINK	= -lft -lXext -lX11 -lmlx
 
 $(NAME): $(OBJ)
 	@ make -s -C $(LIBFT)
-	@ $(CC) $(CFLAGS) $(OBJ) $(INCLUDE) $(LINK) -o $(NAME)
+	@ $(CC) $(CFLAGS) -O3 $(OBJ) $(INCLUDE) $(LIBS) $(LINK) -o $(NAME)
 	@ echo "Made $(value NAME)"
 
 all: $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:.c=.o)
+
+debug:
+	@ make -s -C $(LIBFT)
+	@ $(CC) $(CFLAGS) $(DEBUG) $(SRC) $(INCLUDE) $(LIBS) $(LINK) -o $(NAME)
+	@ echo "Made $(value NAME) for debug"
 
 clean:
 	@ make -s clean -C $(LIBFT)
@@ -50,4 +57,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug

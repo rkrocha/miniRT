@@ -1,29 +1,40 @@
-# It will contain the window/rendered image size, which implies your miniRT must be able to render in any positive size.
+R	ayy lmao
 
-# Each type of element can be separated by one or more line break(s).
+R	29200 20800
+R	1920 1080
+R	-19 -10
 
-# Each type of information from an element can be separated by one or more space(s).
+A	-0.2											255,255,255
+A	2												255,255,255
+A	0												255,-10,255
 
-# Each type of element can be set in any order in the file.
+c	,0,20		-1,0,0		270
+c	-50,0,20		0,2,0		-70
 
-# Elements which are defined by a capital letter can only be declared once in the scene.
 
+x	-50,0,20		0,0,0		-70
 
-R	2920 1080
+l	-40,0,30		0.7								255,300,255
+l	-40.3,0,30		-0.7								255,255,255
+l	-40,0,30		2								255,255,-1
 
-A	0.2												255,255,255
-A	0												255,255,255
+=P
 
-c	-50,0,20		0,0,0		70
+pl	-0,0,0	      	0,1.0,-2							255,-0,225
+pl	-0,0,0	      	0,1.0,0							255,0,225
+pl	-0,0,0	      	-0,1.01,0							-255,0,225
 
-l	-40,0,30		0.7								255,255,255
+sp	0,0,20						-20					255,0,0
+sp	0,0,20						0					255,300,0
 
-pl	0,0,0			0,1.0,0							255,0,225
+sq	0,100,40.0		0,0,10		30					420,69,420
+sq	0,100,40		0,0,1.9		30					96,42,0
+sq	0,100,40.2		0-,0,1.0		30					42,42,0
 
-sp	0,0,20						20					255,0,0
+cy	50.0,0.0,20.6	0,0,+1.0		-14.2		-21.42	10,0,255
+cy	a,0.0,20.6	    0,0,-1.1		0     		0      	10,0,255
+cy	50.0,0.0,20.6	0,-0,-1.0		14.2		21.42	10,0,255
 
-sq	0,100,40		0,0,1.0		30					42,42,0
+tr	10,20,10.0		-10,-10,-20	20,10,10.2			0,0,255
 
-cy	50.0,0.0,20.6	0,0,1.0		14.2		21.42	10,0,255
-
-tr	10,20,10		10,10,20	20,10,10			0,0,255
+PLEASE DON'T BREAK :(

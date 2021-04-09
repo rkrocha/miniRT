@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:40:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/08 09:21:15 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/09 16:50:32 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,4 @@ void	print_system_error(const char *message)
 	ft_strlcpy(error_str, "Error\nSystem, ", sizeof(error_str));
 	ft_strlcat(error_str, message, sizeof(error_str));
 	perror(error_str);
-	exit(EXIT_FAILURE);
 }

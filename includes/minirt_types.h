@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/08 08:14:04 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:00:54 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # include "ft_vectors.h"
 
-typedef int		t_rgb;
+typedef int	t_rgb;
 
 typedef struct s_camera
 {

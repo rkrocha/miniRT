@@ -6,13 +6,13 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/04/08 09:47:22 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/09 18:09:52 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 
-SRC		= minirt.c minirt_scene.c minirt_error.c
+SRC		= minirt.c minirt_scene.c minirt_error.c get_next_line.c
 
 OBJ		= $(SRC:.c=.o)
 

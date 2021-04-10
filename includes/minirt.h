@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/09 18:08:29 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/10 12:39:41 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,12 @@
 */
 void	parse_scene(const char *file, t_scene *scene);
 void	free_scene(t_scene *scene);
+
+/*
+** minirt_parse_elements.c:
+*/
+void	parse_invalid_element(char *line, bool	*error, int line_num);
+void	parse_resolution(char *line, t_scene *scene, bool *error, int line_num);
+void	parse_element(char *line, t_scene *scene, bool *scene_error);
 
 #endif

@@ -6,13 +6,17 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/04/09 18:09:52 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/10 10:57:38 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 
-SRC		= minirt.c minirt_scene.c minirt_error.c get_next_line.c
+SRC		= minirt.c \
+		minirt_error.c \
+		minirt_scene.c \
+		minirt_parse_elements.c \
+		get_next_line.c
 
 OBJ		= $(SRC:.c=.o)
 
@@ -24,7 +28,7 @@ CC		= clang
 
 CFLAGS	= -Wall -Werror -Wextra
 
-DEBUG	= -fsanitize=address -g3
+DEBUG	= -fsanitize=address -g3 -D MINIRT_DEBUG=1
 
 INCLUDE	= -I./includes/
 
@@ -40,7 +44,7 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 .c.o:
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) -O3 $(INCLUDE) -c $< -o $(<:.c=.o)
 
 debug:
 	@ make -s -C $(LIBFT)

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:17:23 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/09 18:34:22 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/10 12:38:39 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,19 @@ static bool	check_file_extension(const char *file)
 	extension = ft_strrchr(file, '.');
 	if (extension && !ft_strncmp(extension, ".rt", 4))
 		return (true);
-	print_scene_error(SCENE_EXT, NULL, 0);
+	print_scene_error(SCENE_EXT, 0);
 	return (false);
 }
 
-static void	parse_element(char *line, t_scene *scene, bool *scene_error)
-{
-	static size_t	line_count;
-
-	line_count++;
-	if (*line == '\0' || *line == '#')
-		return ;
-	printf("%s\n", line);
-	(void)scene;
-	(void)scene_error;
-}
-
+/*
+** Scene parsing starts as long as scene file extension is valid and this file
+** is opened without system errors. Any system errors cause the parsing to stop.
+**
+** Flaws contained inside the scene file, such as invalid type identifiers,
+** invalid number types or ranges, or multiple inclusions of types that should
+** be unique, will cause parsing to continue until EOF, printing all errors
+** encountered.
+*/
 void	parse_scene(const char *file, t_scene *scene)
 {
 	int		fd;
@@ -75,7 +72,7 @@ void	parse_scene(const char *file, t_scene *scene)
 		parse_element(line, scene, &scene_error);
 		free(line);
 	}
-	if (scene_error || gnl_return == -1)
+	if (scene_error || gnl_return == -1) // CHECK UNDEF VARIABLES: RES AND AMBL
 	{
 		free_scene(scene);
 		exit(EXIT_FAILURE);

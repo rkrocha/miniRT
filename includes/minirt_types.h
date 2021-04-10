@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/09 18:00:54 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/10 11:37:16 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ typedef struct s_scene
 	int			render_height;
 	t_light		ambient;
 	t_list		*camera;
-	t_list		*object;
 	t_list		*light;
+	t_list		*object;
+	bool		defined_resolution;
+	bool		defined_ambient_light;
 }	t_scene;
 
 /*

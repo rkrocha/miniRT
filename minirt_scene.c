@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:17:23 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/10 12:38:39 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/10 18:30:57 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	check_file_extension(const char *file)
 ** Flaws contained inside the scene file, such as invalid type identifiers,
 ** invalid number types or ranges, or multiple inclusions of types that should
 ** be unique, will cause parsing to continue until EOF, printing all errors
-** encountered.
+** encountered and only then stop execution.
 */
 void	parse_scene(const char *file, t_scene *scene)
 {
@@ -69,7 +69,7 @@ void	parse_scene(const char *file, t_scene *scene)
 			print_system_error(SYSTEM_GNL);
 			break ;
 		}
-		parse_element(line, scene, &scene_error);
+		parse_by_type(line, scene, &scene_error);
 		free(line);
 	}
 	if (scene_error || gnl_return == -1) // CHECK UNDEF VARIABLES: RES AND AMBL

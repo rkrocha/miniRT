@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/10 12:38:32 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/10 18:30:56 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** white spaces, then it is ignored. If any other unexpected character is
 ** found, then both the line and the scene file are considered invalid.
 */
-void	parse_invalid_element(char *line, bool	*error, int line_num)
+void	parse_invalid_element(char *line, bool *error, int line_num)
 {
 	if (!ft_strignore(line, WHITE_SPACES))
 		return ;
@@ -51,10 +51,7 @@ void	parse_resolution(char *line, t_scene *scene, bool *error, int line_num)
 	}
 }
 
-/*
-** 
-*/
-void	parse_element(char *line, t_scene *scene, bool *scene_error)
+void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
 {
 	static int	line_num;
 

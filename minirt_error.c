@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:40:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/10 10:39:17 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/14 11:56:08 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_scene_error(const char *message, size_t line)
 {
 	static bool	first_error = true;
 	char		error_str[128];
-	char		*line_str;
+	char		*line_num_str;
 
 	if (first_error)
 	{
@@ -42,10 +42,10 @@ void	print_scene_error(const char *message, size_t line)
 	if (line)
 	{
 		ft_strlcpy(error_str, "Scene line ", sizeof(error_str));
-		ft_strlcat(error_str, line_str = ft_itoa(line), sizeof(error_str));
+		ft_strlcat(error_str, line_num_str = ft_itoa(line), sizeof(error_str));
+		free(line_num_str);
 		ft_strlcat(error_str, ": ", sizeof(error_str));
 		ft_strlcat(error_str, message, sizeof(error_str));
-		free(line_str);
 	}
 	else
 		ft_strlcpy(error_str, message, sizeof(error_str));

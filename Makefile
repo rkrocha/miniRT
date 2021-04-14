@@ -6,16 +6,18 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/04/10 10:57:38 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/14 11:34:32 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= miniRT
 
 SRC		= minirt.c \
-		minirt_error.c \
 		minirt_scene.c \
 		minirt_parse_elements.c \
+		minirt_parse_utils.c \
+		minirt_debug_elements.c \
+		minirt_error.c \
 		get_next_line.c
 
 OBJ		= $(SRC:.c=.o)

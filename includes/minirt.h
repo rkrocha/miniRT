@@ -6,12 +6,16 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/10 18:31:10 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:02:05 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+# ifndef MINIRT_DEBUG
+#  define MINIRT_DEBUG 0
+# endif
 
 # include <fcntl.h>
 # include <errno.h>
@@ -33,17 +37,26 @@ void	free_scene(t_scene *scene);
 /*
 ** minirt_parse_elements.c:
 */
-void	parse_invalid_element(char *line, bool *error, int line_num);
-void	parse_resolution(char *line, t_scene *scene, bool *error, int line_num);
 void	parse_by_type(char *line, t_scene *scene, bool *scene_error);
 
 /*
 ** minirt_parse_objects.c:
 */
 
+
 /*
 ** minirt_parse_utils.c:
 */
-t_coord	parse_coords(char **line, bool *scene_error, int line_num);
+bool	get_next_float(float *number, char **line);
+bool	get_next_int(int *number, char **line);
+bool	parse_light_ratio(float *ratio, char **line, int line_num);
+bool	parse_rgb(int *color, char **line, int line_num);
+
+/*
+** minirt_debug_elements.c:
+*/
+void	minirt_debug_line(char *line, int line_num);
+void	minirt_debug_res(char *line, t_scene scene, int line_num);
+void	minirt_debug_ambl(char *line, t_light ambient, int line_num);
 
 #endif

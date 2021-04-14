@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/10 18:30:56 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:03:03 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** white spaces, then it is ignored. If any other unexpected character is
 ** found, then both the line and the scene file are considered invalid.
 */
-void	parse_invalid_element(char *line, bool *error, int line_num)
+static void	parse_invalid_element(char *line, bool *error, int line_num)
 {
 	if (!ft_strignore(line, WHITE_SPACES))
 		return ;
@@ -29,26 +29,47 @@ void	parse_invalid_element(char *line, bool *error, int line_num)
 ** Multiple definitions of resolution, or resolution values smaller than 1
 ** will cause both the line and the scene file to be considered invalid.
 */
-void	parse_resolution(char *line, t_scene *scene, bool *error, int line_num)
+static void	parse_res(char *line, t_scene *scene,bool *error, int line_num)
 {
+	char	*original_line;
+
+	original_line = line;
 	if (scene->defined_resolution)
 	{
 		print_scene_error(SCENE_MULT_RES, line_num);
 		*error = true;
 		return ;
 	}
-	line++;
-	line = ft_strignore(line, WHITE_SPACES);
-	scene->render_width = ft_atoi(line);
-	line = ft_strignore(line, DECIMAL_BASE);
-	line = ft_strignore(line, WHITE_SPACES);
-	scene->render_height = ft_atoi(line);
+	get_next_int(&scene->render_width, &line);
+	get_next_int(&scene->render_height, &line);
 	scene->defined_resolution = true;
 	if (scene->render_width <= 0 || scene->render_height <= 0)
 	{
 		print_scene_error(SCENE_RES, line_num);
 		*error = true;
 	}
+	if (MINIRT_DEBUG)
+		minirt_debug_res(original_line, *scene, line_num);
+}
+
+static void	parse_ambl(char *line, t_scene *scene, bool *error, int line_num)
+{
+	char	*original_line;
+
+	original_line = line;
+	if (scene->defined_ambient_light)
+	{
+		print_scene_error(SCENE_MULT_AMBL, line_num);
+		*error = true;
+		return ;
+	}
+	if (!parse_light_ratio(&scene->ambient.ratio, &line, line_num))
+		*error = true;
+	if (!parse_rgb(&scene->ambient.color, &line, line_num))
+		*error = true;
+	scene->defined_ambient_light = true;
+	if (MINIRT_DEBUG)
+		minirt_debug_ambl(original_line, scene->ambient, line_num);
 }
 
 void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
@@ -59,9 +80,9 @@ void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
 	if (*line == '\0' || *line == '#')
 		return ;
 	else if (*line == 'R')
-		parse_resolution(line, scene, scene_error, line_num);
-	// else if (*line == 'A')
-	// 	parse_amb_light(line, scene, scene_error, line_num);
+		parse_res(line, scene, scene_error, line_num);
+	else if (*line == 'A')
+		parse_ambl(line, scene, scene_error, line_num);
 	// else if (*line == 'c')
 	// 	parse_camera(line, scene, scene_error, line_num);
 	// else if (*line == 'l')

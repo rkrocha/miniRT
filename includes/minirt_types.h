@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/10 11:37:16 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:03:02 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,18 @@
 
 # include "ft_vectors.h"
 
-typedef int	t_rgb;
-
 typedef struct s_camera
 {
 	t_coord		position;
-	t_vector	orientation;
+	t_coord		orientation;
 	float		fov;
 }	t_camera;
 
 typedef struct s_light
 {
 	t_coord		position;
-	float		brightness;
-	t_rgb		color;
+	float		ratio;
+	int			color;
 }	t_light;
 
 typedef struct s_scene
@@ -61,14 +59,14 @@ typedef struct s_cylinder
 	t_coord		position;
 	float		diameter;
 	float		height;
-	t_rgb		color;
+	int			color;
 }	t_cylinder;
 
 typedef struct s_plane
 {
 	t_uchar		id;
 	t_coord		position;
-	t_vector	orientation;
+	t_coord		orientation;
 }	t_plane;
 
 typedef struct s_sphere
@@ -76,16 +74,16 @@ typedef struct s_sphere
 	t_uchar		id;
 	t_coord		position;
 	float		diameter;
-	t_rgb		color;
+	int			color;
 }	t_sphere;
 
 typedef struct s_square
 {
 	t_uchar		id;
 	t_coord		position;
-	t_vector	orientation;
+	t_coord		orientation;
 	float		side;
-	t_rgb		color;
+	int			color;
 }	t_square;
 
 typedef struct s_triangle
@@ -94,7 +92,7 @@ typedef struct s_triangle
 	t_coord		point_a;
 	t_coord		point_b;
 	t_coord		point_c;
-	t_rgb		color;
+	int			color;
 }	t_triangle;
 
 #endif

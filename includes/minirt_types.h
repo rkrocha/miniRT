@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 15:03:02 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:02:07 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_camera
 {
 	t_coord		position;
-	t_coord		orientation;
+	t_coord		orient;
 	float		fov;
 }	t_camera;
 
@@ -66,7 +66,7 @@ typedef struct s_plane
 {
 	t_uchar		id;
 	t_coord		position;
-	t_coord		orientation;
+	t_coord		orient;
 }	t_plane;
 
 typedef struct s_sphere
@@ -81,7 +81,7 @@ typedef struct s_square
 {
 	t_uchar		id;
 	t_coord		position;
-	t_coord		orientation;
+	t_coord		orient;
 	float		side;
 	int			color;
 }	t_square;

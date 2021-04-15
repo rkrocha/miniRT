@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:40:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 11:56:08 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/14 20:59:00 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	*malloc_check(size_t size)
 
 	ptr = malloc(size);
 	if (!ptr)
+	{
 		print_system_error(SYSTEM_MALLOC);
+		exit(EXIT_FAILURE);
+	}
 	return (ptr);
 }
 

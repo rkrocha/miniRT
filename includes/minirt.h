@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 21:22:40 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/15 10:46:59 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	debug_line(char *line, int line_num);
 void	debug_res(char *line, t_scene scene, int line_num);
 void	debug_ambl(char *line, t_light ambient, int line_num);
 void	debug_camera(char *line, t_camera camera, int line_num);
+void	debug_light(char *line, t_light light, int line_num);
 
 #endif

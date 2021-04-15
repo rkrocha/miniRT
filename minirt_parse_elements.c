@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 21:38:06 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/15 10:52:46 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	parse_camera(char *line, t_list **camera, bool *error, int line_num)
 		|| !(parse_orientation(&new_cam->orient, &line, line_num)))
 		*error = true;								// normalize orientation
 	if (!get_next_float(&new_cam->fov, &line)
-		|| new_cam->fov <= 0.0 || new_cam->fov > 180.0) // check zero condition
+		|| new_cam->fov <= 0.0 || new_cam->fov > 180.0)// check zero condition
 	{
 		print_scene_error(SCENE_CAM_FOV, line_num);
 		*error = true;
@@ -82,6 +82,26 @@ static void	parse_camera(char *line, t_list **camera, bool *error, int line_num)
 		ft_lstadd_back(camera, ft_lstnew(new_cam));
 	if (MINIRT_DEBUG)
 		debug_camera(original_line, *new_cam, line_num);
+}
+
+static void	parse_light(char *line, t_list **light, bool *error, int line_num)
+{
+	t_light	*new_light;
+	char	*original_line;
+
+	original_line = line;
+	new_light = (t_light *)malloc_check(sizeof(t_light));
+	ft_bzero(new_light, (sizeof(new_light)));
+	if (!parse_position(&new_light->position, &line, line_num)
+		|| !parse_light_ratio(&new_light->ratio, &line, line_num)
+		|| !parse_rgb(&new_light->color, &line, line_num))
+		*error = true;
+	if (!(*light))
+		*light = ft_lstnew(new_light);
+	else
+		ft_lstadd_back(light, ft_lstnew(new_light));
+	if (MINIRT_DEBUG)
+		debug_light(original_line, *new_light, line_num);
 }
 
 void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
@@ -95,10 +115,6 @@ void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
 		parse_res(line, scene, scene_error, line_num);
 	else if (*line == 'A')
 		parse_ambl(line, scene, scene_error, line_num);
-	else if (*line == 'c')
-		parse_camera(line, &scene->camera, scene_error, line_num);
-	// else if (*line == 'l')
-	// 	parse_light(line, scene, scene_error, line_num);
 	// else if (*line == 'p' && *(line + 1) == 'l')
 	// 	parse_plane(line, scene, scene_error, line_num);
 	// else if (*line == 's' && *(line + 1) == 'p')
@@ -109,6 +125,10 @@ void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
 	// 	parse_cylinder(line, scene, scene_error, line_num);
 	// else if (*line == 't' && *(line + 1) == 'r')
 	// 	parse_triangle(line, scene, scene_error, line_num);
+	else if (*line == 'c')
+		parse_camera(line, &scene->camera, scene_error, line_num);
+	else if (*line == 'l')
+		parse_light(line, &scene->light, scene_error, line_num);
 	else
 		parse_invalid_element(line, scene_error, line_num);
 }

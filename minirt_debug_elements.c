@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 10:57:10 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 12:09:07 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:53:42 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	debug_camera(char *line, t_camera camera, int line_num)
 		debug_line(line, line_num);
 	printf("Parsed camera at position %.1f %.1f %.1f, ",
 		camera.position.x, camera.position.y, camera.position.z);
-	printf("orientation %.1f %.1f %.1f, ", 
+	printf("orientation %.1f %.1f %.1f, ",
 		camera.orient.x, camera.orient.y, camera.orient.z);
 	printf("FOV %.f\n\n", camera.fov);
 }

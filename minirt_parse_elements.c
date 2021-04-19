@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 15:35:49 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:54:05 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	parse_ambl(char *line, t_scene *scene, bool *error, int line_num)
 		return ;
 	}
 	if (ft_str_word_count(line) < 3)
-		{
+	{
 		print_scene_error(SCENE_FEW_ARGS, line_num);
 		*error = true;
 		return ;
@@ -134,12 +134,12 @@ void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
 		parse_cylinder(line, &scene->object, scene_error, line_num);
 	else if (*line == 'p' && *(line + 1) == 'l')
 		parse_plane(line, &scene->object, scene_error, line_num);
-	// else if (*line == 's' && *(line + 1) == 'p')
-	// 	parse_sphere(line, &scene->object, scene_error, line_num);
-	// else if (*line == 's' && *(line + 1) == 'q')
-	// 	parse_square(line, &scene->object, scene_error, line_num);
-	// else if (*line == 't' && *(line + 1) == 'r')
-	// 	parse_triangle(line, &scene->object, scene_error, line_num);
+	else if (*line == 's' && *(line + 1) == 'p')
+		parse_sphere(line, &scene->object, scene_error, line_num);
+	else if (*line == 's' && *(line + 1) == 'q')
+		parse_square(line, &scene->object, scene_error, line_num);
+	else if (*line == 't' && *(line + 1) == 'r')
+		parse_triangle(line, &scene->object, scene_error, line_num);
 	else if (*line == 'c')
 		parse_camera(line, &scene->camera, scene_error, line_num);
 	else if (*line == 'l')

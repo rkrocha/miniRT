@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 15:33:25 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 16:48:54 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	parse_by_type(char *line, t_scene *scene, bool *scene_error);
 */
 void	parse_cylinder(char *line, t_list **object, bool *error, int line_num);
 void	parse_plane(char *line, t_list **object, bool *error, int line_num);
-
+void	parse_sphere(char *line, t_list **object, bool *error, int line_num);
+void	parse_square(char *line, t_list **object, bool *error, int line_num);
+void	parse_triangle(char *line, t_list **object, bool *error, int line_num);
 
 /*
 ** minirt_parse_utils.c:
@@ -69,5 +71,8 @@ void	debug_light(char *line, t_light light, int line_num);
 */
 void	debug_cylinder(char *line, t_cylinder cylinder, int line_num);
 void	debug_plane(char *line, t_plane plane, int line_num);
+void	debug_sphere(char *line, t_sphere sphere, int line_num);
+void	debug_square(char *line, t_square square, int line_num);
+void	debug_triangle(char *line, t_triangle triangle, int line_num);
 
 #endif

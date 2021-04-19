@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:56:53 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 14:18:43 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 12:33:48 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 ** SCENE ERROR MESSAGES:
 */
 # define SCENE_EXT			"Scene file must use extension .rt"
+
+# define SCENE_FEW_ARGS		"insufficient arguments"
 
 # define SCENE_RES			"invalid resolution"
 # define SCENE_NO_RES		"resolution undefined"

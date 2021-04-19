@@ -6,17 +6,18 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:17:23 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/10 18:30:57 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:35:27 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	free_scene(t_scene *scene)
+void	free_scene(t_scene **scene)
 {
-	ft_lstclear(&scene->camera, free);
-	ft_lstclear(&scene->object, free);
-	ft_lstclear(&scene->light, free);
+	ft_lstclear(&(*scene)->camera, free);
+	ft_lstclear(&(*scene)->object, free);
+	ft_lstclear(&(*scene)->light, free);
+	*scene = NULL;
 }
 
 static bool	open_file(const char *file, int *fd)
@@ -70,11 +71,11 @@ void	parse_scene(const char *file, t_scene *scene)
 			break ;
 		}
 		parse_by_type(line, scene, &scene_error);
-		free(line);
+		ft_strdel(&line);
 	}
 	if (scene_error || gnl_return == -1) // CHECK UNDEF VARIABLES: RES AND AMBL
 	{
-		free_scene(scene);
+		free_scene(&scene);
 		exit(EXIT_FAILURE);
 	}
 }

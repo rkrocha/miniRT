@@ -6,18 +6,18 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 17:02:07 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:28:37 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_TYPES_H
 # define MINIRT_TYPES_H
 
-# define ID_CYLINDER	1
-# define ID_PLANE		2
-# define ID_SPHERE		3
-# define ID_SQUARE		4
-# define ID_TRIANGLE	5
+# define TYPE_CYLINDER	1
+# define TYPE_PLANE		2
+# define TYPE_SPHERE	3
+# define TYPE_SQUARE	4
+# define TYPE_TRIANGLE	5
 
 # include "ft_vectors.h"
 
@@ -57,6 +57,7 @@ typedef struct s_cylinder
 {
 	t_uchar		id;
 	t_coord		position;
+	t_coord		orient;
 	float		diameter;
 	float		height;
 	int			color;
@@ -67,6 +68,7 @@ typedef struct s_plane
 	t_uchar		id;
 	t_coord		position;
 	t_coord		orient;
+	int			color;
 }	t_plane;
 
 typedef struct s_sphere

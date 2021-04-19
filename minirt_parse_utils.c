@@ -6,31 +6,11 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:14:10 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 21:39:08 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:37:40 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-bool	get_next_float(float *number, char **line)
-{
-	*line = ft_strsearch(*line, "+-.0123456789");
-	if (!(*line))
-		return (false);
-	*number = ft_atof(*line);
-	*line = ft_strignore(*line, "+-.0123456789");
-	return (true);
-}
-
-bool	get_next_int(int *number, char **line)
-{
-	*line = ft_strsearch(*line, "+-.0123456789");
-	if (!(*line))
-		return (false);
-	*number = ft_atoi(*line);
-	*line = ft_strignore(*line, "+-.0123456789");
-	return (true);
-}
 
 /*
 ** If a line that does not match any expected type identifier contains only
@@ -39,106 +19,95 @@ bool	get_next_int(int *number, char **line)
 */
 void	parse_invalid_element(char *line, bool *error, int line_num)
 {
-	if (!ft_strignore(line, WHITE_SPACES))
+	if (!ft_strignore(line, BLANK_SPACES))
 		return ;
 	print_scene_error(SCENE_INVALID_TYPE, line_num);
 	*error = true;
 }
 
-bool	parse_light_ratio(float *ratio, char **line, int line_num)
+void	parse_light_ratio(float *ratio, char *str, bool *error, int line_num)
 {
-	if (!get_next_float(ratio, line)
-		|| *ratio < 0.0 || *ratio > 1.0)
+	*ratio = ft_atof(str);
+	if (*ratio < 0 || *ratio > 1)
 	{
 		print_scene_error(SCENE_LIGHT, line_num);
-		return (false);
+		*error = true;
 	}
-	return (true);
 }
 
-bool	parse_rgb(int *color, char **line, int line_num)
+void	parse_rgb(int *color, char *str, bool *error, int line_num)
 {
-	char	*end_ptr;
-	bool	rgb_error;
 	int		rgb[3];
-	int		i;
+	char	**rgb_split;
+	short	i;
 
+	rgb_split = ft_split(str, ',');
 	i = 0;
-	rgb_error = false;
-	*line = ft_strignore(*line, WHITE_SPACES);
-	end_ptr = ft_strignore(*line, "+,0123456789");
 	while (i < 3)
 	{
-		if (!get_next_int(&rgb[i], line) || (end_ptr && *line > end_ptr)
-			|| rgb[i] < 0 || rgb[i] > 255)
+		if (rgb_split[i])
+			rgb[i] = ft_atoi(rgb_split[i]);
+		else if (!rgb_split[i] || rgb[i] < 0 || rgb[i] > 255)
 		{
-			if (!rgb_error)
-				print_scene_error(SCENE_RGB, line_num);
-			rgb_error = true;
+			print_scene_error(SCENE_RGB, line_num);
+			*error = true;
+			if (!rgb_split[i])
+				break ;
 		}
 		i++;
 	}
+	ft_split_free(&rgb_split);
 	*color = (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
-	if (rgb_error)
-		return (false);
-	return (true);
 }
 
-bool	parse_position(t_coord *position, char **line, int line_num)
+void	parse_position(t_coord *position, char *str, bool *error, int line_num)
 {
-	char	*end_ptr;
-	bool	pos_error;
 	float	coord[3];
-	int		i;
+	char	**coord_split;
+	short	i;
 
+	coord_split = ft_split(str, ',');
 	i = 0;
-	pos_error = false;
-	*line = ft_strignore(*line + 1, WHITE_SPACES);
-	end_ptr = ft_strignore(*line, "+-.,0123456789");
 	while (i < 3)
 	{
-		if (!get_next_float(&coord[i], line) || (end_ptr && *line > end_ptr))
+		if (coord_split[i])
+			coord[i] = ft_atof(coord_split[i]);
+		else
 		{
-			if (!pos_error)
-				print_scene_error(SCENE_COORD, line_num);
-			pos_error = true;
+			print_scene_error(SCENE_COORD, line_num);
+			*error = true;
+			break ;
 		}
 		i++;
 	}
+	ft_split_free(&coord_split);
 	position->x = coord[0];
 	position->y = coord[1];
 	position->z = coord[2];
-	if (pos_error)
-		return (false);
-	return (true);
 }
 
-bool	parse_orientation(t_coord *orient, char **line, int line_num)
+void	parse_orient(t_coord *orient, char *str, bool *error, int line_num)
 {
-	char	*end_ptr;
-	bool	orient_error;
 	float	coord[3];
-	int		i;
+	char	**coord_split;
+	short	i;
 
+	coord_split = ft_split(str, ',');
 	i = 0;
-	orient_error = false;
-	*line = ft_strignore(*line, WHITE_SPACES);
-	end_ptr = ft_strignore(*line, "+-.,0123456789");
 	while (i < 3)
 	{
-		if (!get_next_float(&coord[i], line) || (end_ptr && *line > end_ptr))
+		if (coord_split[i])
+			coord[i] = ft_atof(coord_split[i]);
+		else if (!coord_split[i])	// CHECK VECTOR NORMALIZATION
 		{
-			if (!orient_error)
-				print_scene_error(SCENE_ORIENT, line_num);
-			orient_error = true;
+			print_scene_error(SCENE_ORIENT, line_num);
+			*error = true;
+			break ;
 		}
 		i++;
 	}
+	ft_split_free(&coord_split);
 	orient->x = coord[0];
 	orient->y = coord[1];
 	orient->z = coord[2];
-	if (orient_error)
-		return (false);
-	return (true);
 }
-// REWRITE SIMILAR FUNCTIONS?

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 15:28:37 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:14:24 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define TYPE_SQUARE	4
 # define TYPE_TRIANGLE	5
 
-# include "ft_vectors.h"
+# include "libvector.h"
 
 typedef struct s_camera
 {

@@ -6,7 +6,7 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/04/16 13:52:18 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/19 23:11:42 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ OBJ		= $(SRC:.c=.o)
 
 LIBFT	= ./libft/
 
+LIBV	= ./libvector/
+
 MLX		= ./mlx-linux
 
 CC		= clang
@@ -36,10 +38,11 @@ DEBUG	= -fsanitize=address -g3 -D MINIRT_DEBUG=1
 
 INCLUDE	= -I./includes/
 
-LIBS	= -L$(LIBFT) -L$(MLX) -lft -lXext -lX11 -lmlx
+LIBS	= -L$(LIBFT) -L$(LIBV) -L$(MLX) -lft -lvector -lXext -lX11 -lmlx
 
 $(NAME): $(OBJ)
 	@ make -s -C $(LIBFT)
+	@ make -s -C $(LIBV)
 	@ $(CC) $(CFLAGS) -O3 $(OBJ) $(INCLUDE) $(LIBS) -o $(NAME)
 	@ echo "Made $(value NAME)"
 
@@ -50,15 +53,18 @@ all: $(NAME)
 
 debug:
 	@ make -s -C $(LIBFT)
+	@ make -s -C $(LIBV)
 	@ $(CC) $(CFLAGS) $(DEBUG) $(SRC) $(INCLUDE) $(LIBS) -o $(NAME)
 	@ echo "Made $(value NAME) for debug"
 
 clean:
 	@ make -s clean -C $(LIBFT)
+	@ make -s clean -C $(LIBV)
 	@ rm -rf $(OBJ)
 
 fclean: clean
 	@ make -s fclean -C $(LIBFT)
+	@ make -s fclean -C $(LIBV)
 	@ rm -rf $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/20 14:21:31 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/20 16:35:26 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,28 @@
 # include "minirt_types.h"
 # include "mlx.h"
 
+typedef struct	s_image
+{
+	void	*ptr;
+	char	*addr;
+}	t_image;
+
+typedef struct	s_minilibx
+{
+	void	*ptr;
+	void	*window;
+	t_list	*image;
+	t_image	*display;
+	int		bits_per_pixel;
+	int		line_len;
+	int		endian;
+}	t_minilibx;
+
 /*
 ** minirt_mlx_utils.c:
 */
 int		color_picker(t_uchar red, t_uchar green, t_uchar blue);
-void	draw_pixel(t_image *img, int x, int y, int color);
+void	paint_pixel(t_image *img, int x, int y, int color);
 void	fill_image(t_image *img, int color);
 void	create_image(t_image *img, void *mlx, int width, int height);
 

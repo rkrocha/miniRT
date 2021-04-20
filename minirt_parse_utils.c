@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:14:10 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 15:37:40 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:27:14 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ void	parse_position(t_coord *position, char *str, bool *error, int line_num)
 		i++;
 	}
 	ft_split_free(&coord_split);
-	position->x = coord[0];
-	position->y = coord[1];
-	position->z = coord[2];
+	*position = v_create(coord[0], coord[1], coord[2]);
 }
 
 void	parse_orient(t_coord *orient, char *str, bool *error, int line_num)
@@ -98,7 +96,7 @@ void	parse_orient(t_coord *orient, char *str, bool *error, int line_num)
 	{
 		if (coord_split[i])
 			coord[i] = ft_atof(coord_split[i]);
-		else if (!coord_split[i])	// CHECK VECTOR NORMALIZATION
+		else if (!coord_split[i] || coord[i] < -1 || coord[i] > 1)
 		{
 			print_scene_error(SCENE_ORIENT, line_num);
 			*error = true;
@@ -107,7 +105,7 @@ void	parse_orient(t_coord *orient, char *str, bool *error, int line_num)
 		i++;
 	}
 	ft_split_free(&coord_split);
-	orient->x = coord[0];
-	orient->y = coord[1];
-	orient->z = coord[2];
+	*orient = v_create(coord[0], coord[1], coord[2]);
+	if (!v_is_normal(*orient))
+		*orient = v_normalize(*orient);
 }

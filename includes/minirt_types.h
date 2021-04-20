@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 23:14:24 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:51:37 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_scene
 	t_list		*light;
 	t_list		*object;
 	bool		defined_resolution;
-	bool		defined_ambient_light;
+	bool		defined_amblight;
 }	t_scene;
 
 /*

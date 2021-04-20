@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:08:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 11:02:41 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 21:04:35 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char const **argv)
 	{
 		parse_scene(argv[1], &scene);
 		// start_mlx(scene);
+		free_scene(&scene);		// REMOVE
 	}
 	// else if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
 	// {

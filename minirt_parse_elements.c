@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 16:54:05 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:52:26 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	parse_ambl(char *line, t_scene *scene, bool *error, int line_num)
 {
 	char	**str_array;
 
-	if (scene->defined_ambient_light)
+	if (scene->defined_amblight)
 	{
 		print_scene_error(SCENE_MULT_AMBL, line_num);
 		*error = true;
@@ -62,7 +62,7 @@ static void	parse_ambl(char *line, t_scene *scene, bool *error, int line_num)
 	str_array = ft_split(ft_str_remove_blanks(line), ' ');
 	parse_light_ratio(&scene->ambient.ratio, str_array[1], error, line_num);
 	parse_rgb(&scene->ambient.color, str_array[2], error, line_num);
-	scene->defined_ambient_light = true;
+	scene->defined_amblight = true;
 	ft_split_free(&str_array);
 	if (MINIRT_DEBUG)
 		debug_ambl(line, scene->ambient, line_num);

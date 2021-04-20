@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:40:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/14 20:59:00 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/20 00:13:59 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	print_minirt_usage(void)
 {
 	ft_putendl_fd("Usage is:\n./miniRT scene_file.rt\n", 2);
 	ft_putendl_fd("or:\n./miniRT scene_file.rt --save", 2);
+}
+
+void	print_warning(char *message)
+{
+	ft_putstr_fd("\033[1;33mWarning:\033[0m ", 2);
+	ft_putendl_fd(message, 2);
 }
 
 void	print_scene_error(const char *message, size_t line)

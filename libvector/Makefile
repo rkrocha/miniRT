@@ -6,7 +6,7 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/19 23:05:42 by rkochhan          #+#    #+#              #
-#    Updated: 2021/04/19 23:18:26 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/19 23:59:41 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,10 @@ CC		= gcc
 
 CFLAGS	= -Wall -Werror -Wextra
 
+LIBS	= -lm
+
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) $(LIBS) -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJ)
 	@ ar rcs $(NAME) $(OBJ)

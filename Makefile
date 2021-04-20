@@ -6,7 +6,7 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/04/19 23:11:42 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/20 00:00:16 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ DEBUG	= -fsanitize=address -g3 -D MINIRT_DEBUG=1
 
 INCLUDE	= -I./includes/
 
-LIBS	= -L$(LIBFT) -L$(LIBV) -L$(MLX) -lft -lvector -lXext -lX11 -lmlx
+LIBS	= -L$(LIBFT) -L$(LIBV) -L$(MLX) -lft -lvector -lm -lXext -lX11 -lmlx
 
 $(NAME): $(OBJ)
 	@ make -s -C $(LIBFT)

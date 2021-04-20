@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:14:10 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/20 11:43:48 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/20 16:31:41 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	parse_rgb(int *color, char *str, bool *error, int line_num)
 		i++;
 	}
 	ft_split_free(&rgb_split);
-	*color = (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	*color = color_picker(rgb[0], rgb[1], rgb[2]);
 }
 
 void	parse_position(t_coord *position, char *str, bool *error, int line_num)

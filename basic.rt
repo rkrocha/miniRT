@@ -9,7 +9,7 @@
 # Elements which are defined by a capital letter can only be declared once in the scene.
 
 
-R	1920 1080
+R	480 270
 
 A	0.2												255,255,255
 

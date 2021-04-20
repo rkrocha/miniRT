@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:14:10 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 23:27:14 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/20 11:43:48 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ void	parse_orient(t_coord *orient, char *str, bool *error, int line_num)
 	}
 	ft_split_free(&coord_split);
 	*orient = v_create(coord[0], coord[1], coord[2]);
-	if (!v_is_normal(*orient))
+	if (!v_is_normal(*orient) && v_module(*orient) != 0)
 		*orient = v_normalize(*orient);
 }

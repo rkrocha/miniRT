@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:56:53 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/20 00:09:25 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/20 11:51:01 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 */
 # define SCENE_WARN_DARK	"Low ambient lighting ratio! Scene may be too dark"
 # define SCENE_WARN_NO_CAM	"Scene contains no camera! Rendering black screen"
-# define SCENE_WARN_NO_OBJ	"Scene contains no objects! What a sad sight"
+# define SCENE_WARN_NO_OBJ	"Scene contains no objects! What a sad sight..."
 
 /*
 ** DEBUG MESSAGES:

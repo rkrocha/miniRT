@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 21:25:34 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/20 11:38:00 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <errno.h>
 # include <stdio.h>
 # include <sys/stat.h>
+# include "get_next_line.h"
 # include "libft.h"
 # include "libvector.h"
-# include "get_next_line.h"
 # include "minirt_error.h"
 # include "minirt_types.h"
 # include "mlx.h"

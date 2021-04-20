@@ -6,7 +6,7 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/04/20 00:00:16 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/04/20 16:33:02 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME	= miniRT
 
 SRC		= minirt.c \
 		minirt_scene.c \
+		minirt_mlx_utils.c \
 		minirt_parse_elements.c \
 		minirt_parse_objects.c \
 		minirt_parse_utils.c \

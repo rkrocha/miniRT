@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:17:23 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/20 00:13:11 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/04/20 14:53:52 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static bool	check_scene_variables(t_scene scene)
 		print_warning(SCENE_WARN_NO_CAM);
 	if (scene.camera && !scene.object)
 		print_warning(SCENE_WARN_NO_OBJ);
-	if (scene.camera && scene.defined_amblight && scene.ambient.ratio <= 0.2)
+	if (scene.camera && scene.defined_amblight
+		&& (scene.ambient.ratio >= 0 && scene.ambient.ratio <= 0.2))
 		print_warning(SCENE_WARN_DARK);
 	return (true);
 }
@@ -91,7 +92,7 @@ void	parse_scene(const char *file, t_scene *scene)
 		parse_by_type(line, scene, &scene_error);
 		ft_strdel(&line);
 	}
-	if (!check_scene_variables(*scene) ||scene_error || gnl_return == -1)
+	if (!check_scene_variables(*scene) || scene_error || gnl_return == -1)
 	{
 		free_scene(scene);
 		exit(EXIT_FAILURE);

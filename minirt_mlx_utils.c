@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:16:20 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/20 16:33:27 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/01 09:13:50 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,36 @@ int	color_picker(t_uchar red, t_uchar green, t_uchar blue)
 	return (red << 16 | green << 8 | blue);
 }
 
-void	paint_pixel(t_image *img, int x, int y, int color)
+void	create_image(t_minilibx *mlx, int width, int height)
 {
-	char	*pix;
-
-	pix = img->addr + (y * img->line_len + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)pix = color;
+	mlx->img_ptr = mlx_new_image(mlx->ptr, width, height);
+	mlx->img_addr = mlx_get_data_addr(mlx->img_ptr, &mlx->bits_per_pixel,
+			&mlx->line_len, &mlx->endian);
 }
 
-void	fill_image(t_image *img, int color)
+void	putpixel_image(t_minilibx *mlx, int x, int y, int color)
+{
+	char	*pixel;
+
+	pixel = mlx->img_addr + (y * mlx->line_len + x * (mlx->bits_per_pixel / 8));
+	*(unsigned int *)pixel = color;
+}
+
+void	fill_image(t_minilibx *mlx, t_scene *scene, int color)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	while (y <= img->height)
+	while (y <= scene->render_height)
 	{
-		while (x <= img->width)
+		while (x <= scene->render_width)
 		{
-			paint_pixel(img, x, y, color);
+			putpixel_image(mlx, x, y, color);
 			x++;
 		}
 		y++;
 		x = 0;
 	}
-}
-
-void	create_image(t_image *img, void *mlx, int width, int height)
-{
-	img->ptr = mlx_new_image(mlx, width, height);
-	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel,
-			&img->line_len, &img->endian);
-	img->width = width;
-	img->height = height;
 }

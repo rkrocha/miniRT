@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:56:53 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/20 11:51:01 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/01 08:58:48 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define SCENE_WARN_DARK	"Low ambient lighting ratio! Scene may be too dark"
 # define SCENE_WARN_NO_CAM	"Scene contains no camera! Rendering black screen"
 # define SCENE_WARN_NO_OBJ	"Scene contains no objects! What a sad sight..."
+# define SCENE_WARN_RES_X	"Scene x resolution larger than screen! Adjusting"
+# define SCENE_WARN_RES_Y	"Scene y resolution larger than screen! Adjusting"
 
 /*
 ** DEBUG MESSAGES:

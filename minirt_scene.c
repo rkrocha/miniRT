@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:17:23 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/20 14:53:52 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/01 10:22:37 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	parse_scene(const char *file, t_scene *scene)
 
 	if (!check_file_extension(file) || !open_file(file, &fd))
 		exit(EXIT_FAILURE);
-	ft_bzero(scene, sizeof(t_scene));
+	scene_error = false;
 	gnl_return = 1;
 	while (gnl_return > 0)
 	{

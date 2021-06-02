@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/01 09:59:41 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/02 14:24:54 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,31 @@ typedef struct s_minilibx
 {
 	void	*ptr;
 	void	*window;
-	t_list	*first_cam;
 	t_list	*active_cam;
-	void	*img_ptr;
-	char	*img_addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
+	t_scene	*scene;
 }	t_minilibx;
 
 /*
-** minirt_window.c:
+** minirt_display.c:
 */
 void	check_adjust_window_resolution(t_minilibx *mlx, t_scene *scene);
 void	display_manager(t_minilibx *mlx);
 
 /*
+** minirt_mlx_hook_functions.c:
+*/
+int		close_window(t_minilibx *mlx);
+int		keyboard_input(int keycode, t_minilibx *mlx);
+int		refresh_display(t_minilibx *mlx);
+
+/*
 ** minirt_mlx_utils.c:
 */
+void	create_image(t_minilibx *mlx);
+void	lst_image_destroy(t_minilibx *mlx, t_list *lst);
 int		color_picker(t_uchar red, t_uchar green, t_uchar blue);
-void	create_image(t_minilibx *mlx, int width, int height);
-void	putpixel_image(t_minilibx *mlx, int x, int y, int color);
-void	fill_image(t_minilibx *mlx, t_scene *scene, int color);
+void	putpixel_image(t_image *image, int x, int y, int color);
+void	fill_image(t_minilibx *mlx, int color);
 
 /*
 ** minirt_scene.c:

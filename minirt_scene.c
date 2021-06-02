@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 09:17:23 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/01 10:22:37 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/02 11:33:55 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ void	free_scene(t_scene *scene)
 
 static bool	check_scene_variables(t_scene scene)
 {
+	if (!scene.defined_resolution)
+		print_scene_error(SCENE_NO_RES, 0);
+	if (!scene.defined_amblight)
+		print_scene_error(SCENE_NO_AMBL, 0);
 	if (!scene.defined_resolution || !scene.defined_amblight)
-	{
-		if (!scene.defined_resolution)
-			print_scene_error(SCENE_NO_RES, 0);
-		if (!scene.defined_amblight)
-			print_scene_error(SCENE_NO_AMBL, 0);
 		return (false);
-	}
 	if (!scene.camera)
 		print_warning(SCENE_WARN_NO_CAM);
 	if (scene.camera && !scene.object)

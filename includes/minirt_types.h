@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 23:51:37 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/02 10:02:47 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,22 @@
 
 # include "libvector.h"
 
+typedef struct s_image
+{
+	void	*ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	bool	is_rendered;
+}	t_image;
+
 typedef struct s_camera
 {
 	t_coord		position;
 	t_coord		orient;
 	float		fov;
+	t_image		image;
 }	t_camera;
 
 typedef struct s_light

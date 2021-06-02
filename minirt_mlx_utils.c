@@ -6,44 +6,62 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:16:20 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/01 09:13:50 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/02 14:54:47 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	create_image(t_minilibx *mlx)
+{
+	t_image	*aux_image;
+
+	aux_image = &((t_camera *)mlx->active_cam->content)->image;
+	aux_image->ptr = mlx_new_image(mlx->ptr,
+			mlx->scene->render_width, mlx->scene->render_height);
+	aux_image->addr = mlx_get_data_addr(aux_image->ptr,
+			&aux_image->bpp, &aux_image->line_len, &aux_image->endian);
+}
+
+void	lst_image_destroy(t_minilibx *mlx, t_list *lst)
+{
+	if (!lst)
+		return ;
+	while (lst != NULL)
+	{
+		if (((t_camera *)lst->content)->image.is_rendered == true)
+			mlx_destroy_image(mlx->ptr, ((t_camera *)lst->content)->image.ptr);
+		lst = lst->next;
+	}
+}
 
 int	color_picker(t_uchar red, t_uchar green, t_uchar blue)
 {
 	return (red << 16 | green << 8 | blue);
 }
 
-void	create_image(t_minilibx *mlx, int width, int height)
-{
-	mlx->img_ptr = mlx_new_image(mlx->ptr, width, height);
-	mlx->img_addr = mlx_get_data_addr(mlx->img_ptr, &mlx->bits_per_pixel,
-			&mlx->line_len, &mlx->endian);
-}
-
-void	putpixel_image(t_minilibx *mlx, int x, int y, int color)
+void	putpixel_image(t_image *image, int x, int y, int color)
 {
 	char	*pixel;
 
-	pixel = mlx->img_addr + (y * mlx->line_len + x * (mlx->bits_per_pixel / 8));
+	pixel = image->addr + (y * image->line_len + x * (image->bpp / 8));
 	*(unsigned int *)pixel = color;
 }
 
-void	fill_image(t_minilibx *mlx, t_scene *scene, int color)
+void	fill_image(t_minilibx *mlx, int color)
 {
-	int	x;
-	int	y;
+	t_image	*aux_image;
+	int		x;
+	int		y;
 
+	aux_image = &((t_camera *)mlx->active_cam->content)->image;
 	x = 0;
 	y = 0;
-	while (y <= scene->render_height)
+	while (y <= mlx->scene->render_height)
 	{
-		while (x <= scene->render_width)
+		while (x <= mlx->scene->render_width)
 		{
-			putpixel_image(mlx, x, y, color);
+			putpixel_image(aux_image, x, y, color);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:08:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 13:55:40 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 14:55:37 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	render_image(t_scene *scene, t_camera *cam)
 	{
 		while (x <= scene->render_width)
 		{
-			calc_ray(&ray, cam, x, y);
+			calc_ray(&ray, cam, (float)x / scene->render_width, (float)y / scene->render_height);
 			raytrace(scene, &ray);
 			putpixel_image(&cam->image, x, y, ray.hit_color);
 			x++;

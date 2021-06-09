@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 11:57:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 14:07:23 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 15:22:26 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	calc_aux_geometry(t_camera *cam, int res_x, int res_y)
 	t_coord	u;
 	t_coord	v;
 
-	viewport_x = 2 * tanf(cam->fov / 2);
+	viewport_x = 2 * tan(cam->fov / 2);
 	viewport_y = viewport_x * res_y / res_x;
 	n = v_normalize(v_scale(cam->orient, -1));
 	u = v_cross_product(v_create(0, 1, 0), n);
-	v = v_cross_product(n, u);
-	cam->pixel_x = v_scale(u, viewport_x / res_x);
-	cam->pixel_y = v_scale(v, viewport_y / res_y);
+	v = v_cross_product(n, v_scale(u, -1));
+	cam->pixel_x = v_scale(u, viewport_x);
+	cam->pixel_y = v_scale(v, viewport_y);
 	cam->img_origin = v_subtract(cam->position, v_scale(cam->pixel_x, 0.5));
 	cam->img_origin = v_subtract(cam->img_origin, v_scale(cam->pixel_y, 0.5));
 	cam->img_origin = v_subtract(cam->img_origin, n);

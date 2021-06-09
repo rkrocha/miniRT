@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/08 15:04:29 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 14:49:20 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct	s_ray
 {
 	t_coord	origin;
 	t_coord	orient;
-	float	min_time;
 	float	hit_time;
 	int		hit_color;
 	t_coord	hit_point;

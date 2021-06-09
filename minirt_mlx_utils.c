@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:16:20 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/02 14:54:47 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/06 16:12:07 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	create_image(t_minilibx *mlx)
 	aux_image = &((t_camera *)mlx->active_cam->content)->image;
 	aux_image->ptr = mlx_new_image(mlx->ptr,
 			mlx->scene->render_width, mlx->scene->render_height);
+	//   CHECK IMAGE ALLOCATION?
 	aux_image->addr = mlx_get_data_addr(aux_image->ptr,
 			&aux_image->bpp, &aux_image->line_len, &aux_image->endian);
 }

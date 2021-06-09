@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 08:10:48 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/02 14:39:17 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/02 15:18:46 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	close_window(t_minilibx *mlx)
 {
+	printf("%s\n", "Shutting down miniRT. Bye! :)");
 	mlx_destroy_window(mlx->ptr, mlx->window);
 	lst_image_destroy(mlx, mlx->scene->camera);
 	free_scene(mlx->scene);

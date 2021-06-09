@@ -6,12 +6,37 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:08:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/02 14:52:54 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 13:55:40 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+void	render_image(t_scene *scene, t_camera *cam)
+{
+	int		x;
+	int		y;
+	t_ray	ray; //   REGISTER?
+
+	x = 0;
+	y = 0;
+	calc_aux_geometry(cam, scene->render_width, scene->render_height);
+	printf("%s\n", "Rendering new image...");
+	while (y <= scene->render_height)
+	{
+		while (x <= scene->render_width)
+		{
+			calc_ray(&ray, cam, x, y);
+			raytrace(scene, &ray);
+			putpixel_image(&cam->image, x, y, ray.hit_color);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+	printf("%s\n\n", "Rendered!");
+	cam->image.is_rendered = true;
+}
 
 static void	run_mlx(t_scene *scene)
 {
@@ -28,8 +53,7 @@ static void	run_mlx(t_scene *scene)
 	if (mlx.active_cam != NULL)
 	{
 		create_image(&mlx);
-		fill_image(&mlx, 0xAAAAAA);
-		((t_camera *)mlx.active_cam->content)->image.is_rendered = true;
+		render_image(scene, (t_camera *)(mlx.active_cam->content));
 	}
 
 	mlx_key_hook(mlx.window, keyboard_input, &mlx);

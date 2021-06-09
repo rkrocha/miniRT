@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/02 14:24:54 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 10:57:44 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,31 @@ typedef struct s_minilibx
 	t_list	*active_cam;
 	t_scene	*scene;
 }	t_minilibx;
+
+
+/*
+** minirt.c:
+*/
+void	render_image(t_scene *scene, t_camera *cam);
+
+/*
+** minirt_raytracing.c:
+*/
+void	calc_aux_geometry(t_camera *cam, int res_x, int res_y);
+void	calc_ray(t_ray *ray, t_camera *cam, float x, float y);
+void	raytrace(t_scene *scene, t_ray *ray);
+t_coord	calc_hit_point(t_ray *ray);
+
+/*
+** minirt_raytracing_collision.c:
+*/
+void	rt_sphere(void *object, t_ray *ray);
+
+/*
+** minirt_raytracing_utils.c:
+*/
+void	bhaskara(float a, float b, float c, float *root);
+void	arrange_valid_root(float *root);
 
 /*
 ** minirt_display.c:

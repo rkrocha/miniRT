@@ -6,20 +6,32 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/02 10:02:47 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/08 15:04:29 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_TYPES_H
 # define MINIRT_TYPES_H
 
-# define TYPE_CYLINDER	1
-# define TYPE_PLANE		2
-# define TYPE_SPHERE	3
-# define TYPE_SQUARE	4
-# define TYPE_TRIANGLE	5
+# define TYPE_CYLINDER	0
+# define TYPE_PLANE		1
+# define TYPE_SPHERE	2
+# define TYPE_SQUARE	3
+# define TYPE_TRIANGLE	4
 
 # include "libvector.h"
+
+typedef struct	s_ray
+{
+	t_coord	origin;
+	t_coord	orient;
+	float	min_time;
+	float	hit_time;
+	int		hit_color;
+	t_coord	hit_point;
+	t_coord	hit_normal;
+	void	*hit_obj;
+}	t_ray;
 
 typedef struct s_image
 {
@@ -36,6 +48,9 @@ typedef struct s_camera
 	t_coord		position;
 	t_coord		orient;
 	float		fov;
+	t_coord		img_origin;
+	t_coord		pixel_x;
+	t_coord		pixel_y;
 	t_image		image;
 }	t_camera;
 

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 20:54:04 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/02 14:56:06 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/07 12:15:25 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,18 @@ void	check_adjust_window_resolution(t_minilibx *mlx, t_scene *scene)
 
 static void	render_manager(t_minilibx *mlx)
 {
-	t_image	*aux_image;
+	t_image	*active_image;
 
-	aux_image = &((t_camera *)mlx->active_cam->content)->image;
-	if (aux_image->is_rendered == true)
+	active_image = &((t_camera *)mlx->active_cam->content)->image;
+	if (active_image->is_rendered == true)
 	{
 		refresh_display(mlx);
 		printf("%s\n\n", "Image already rendered. Displaying.");
 		return ;
 	}
 	create_image(mlx);
-	fill_image(mlx, 0x333333);
+	render_image(mlx->scene, (t_camera *)(mlx->active_cam->content));
 	refresh_display(mlx);
-	aux_image->is_rendered = true;
-	printf("%s\n\n", "Rendering new image...");
-	// 	RENDER IMAGE
 }
 
 void	display_manager(t_minilibx *mlx)

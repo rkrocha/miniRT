@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:08:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 14:55:37 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/10 10:34:22 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ void	render_image(t_scene *scene, t_camera *cam)
 
 	x = 0;
 	y = 0;
-	calc_aux_geometry(cam, scene->render_width, scene->render_height);
+	calc_aux_geometry(cam, scene->res_x, scene->res_y);
 	printf("%s\n", "Rendering new image...");
-	while (y <= scene->render_height)
+	while (y <= scene->res_y)
 	{
-		while (x <= scene->render_width)
+		while (x <= scene->res_x)
 		{
-			calc_ray(&ray, cam, (float)x / scene->render_width, (float)y / scene->render_height);
+			calc_ray(&ray, cam,
+				(float)x / scene->res_x, (float)y / scene->res_y);
 			raytrace(scene, &ray);
 			putpixel_image(&cam->image, x, y, ray.hit_color);
 			x++;
@@ -34,7 +35,7 @@ void	render_image(t_scene *scene, t_camera *cam)
 		x = 0;
 		y++;
 	}
-	printf("%s\n\n", "Rendered!");
+	printf("%s\n\n", "Rendered!"); //	implement progress bar
 	cam->image.is_rendered = true;
 }
 
@@ -48,7 +49,7 @@ static void	run_mlx(t_scene *scene)
 	mlx.active_cam = scene->camera;
 	check_adjust_window_resolution(&mlx, scene);
 	mlx.window = mlx_new_window(mlx.ptr,
-			scene->render_width, scene->render_height, "miniRT");
+			scene->res_x, scene->res_y, "miniRT");
 
 	if (mlx.active_cam != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 23:52:26 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 15:29:59 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	parse_res(char *line, t_scene *scene, bool *error, int line_num)
 		return ;
 	}
 	str_array = ft_split(ft_str_remove_blanks(line), ' ');
-	scene->render_width = ft_atoi(str_array[1]);
-	scene->render_height = ft_atoi(str_array[2]);
+	scene->res_x = ft_atoi(str_array[1]);
+	scene->res_y = ft_atoi(str_array[2]);
 	scene->defined_resolution = true;
-	if (scene->render_width <= 0 || scene->render_height <= 0)
+	if (scene->res_x <= 0 || scene->res_y <= 0)
 	{
 		print_scene_error(SCENE_RES, line_num);
 		*error = true;

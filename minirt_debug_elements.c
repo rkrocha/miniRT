@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 10:57:10 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 16:53:42 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 15:29:59 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	debug_res(char *line, t_scene scene, int line_num)
 	if (line && line_num)
 		debug_line(line, line_num);
 	printf("Resolution set to %dx%d\n\n",
-		scene.render_width, scene.render_height);
+		scene.res_x, scene.res_y);
 }
 
 void	debug_ambl(char *line, t_light ambient, int line_num)

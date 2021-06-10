@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:44:55 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 23:09:58 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/10 11:45:15 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_coord	v_add(t_coord v, t_coord u);
 ** v_products.c:
 */
 t_coord	v_scale(t_coord v, float scale);
-t_coord	v_cross_product(t_coord v, t_coord u);
-float	v_dot_product(t_coord v, t_coord u);
+t_coord	v_cross(t_coord v, t_coord u);
+float	v_dot(t_coord v, t_coord u);
 
 /*
 ** v_utils.c:

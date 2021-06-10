@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 20:54:04 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/07 12:15:25 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 15:29:59 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	check_adjust_window_resolution(t_minilibx *mlx, t_scene *scene)
 	int	max_y_res;
 
 	mlx_get_screen_size(mlx->ptr, &max_x_res, &max_y_res);
-	if (scene->render_width <= max_x_res && scene->render_height <= max_y_res)
+	if (scene->res_x <= max_x_res && scene->res_y <= max_y_res)
 		return ;
-	if (scene->render_width > max_x_res)
+	if (scene->res_x > max_x_res)
 	{
-		scene->render_width = max_x_res;
+		scene->res_x = max_x_res;
 		print_warning(SCENE_WARN_RES_X);
 	}
-	if (scene->render_height > max_y_res)
+	if (scene->res_y > max_y_res)
 	{
-		scene->render_height = max_y_res;
+		scene->res_y = max_y_res;
 		print_warning(SCENE_WARN_RES_Y);
 	}
 }

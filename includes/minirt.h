@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 10:57:44 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/10 10:36:10 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_coord	calc_hit_point(t_ray *ray);
 /*
 ** minirt_raytracing_collision.c:
 */
+void	rt_plane(void *object, t_ray *ray);
 void	rt_sphere(void *object, t_ray *ray);
 
 /*

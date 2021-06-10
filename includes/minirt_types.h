@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 14:49:20 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/09 15:29:59 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_light
 
 typedef struct s_scene
 {
-	int			render_width;
-	int			render_height;
+	int			res_x;
+	int			res_y;
 	t_light		ambient;
 	t_list		*camera;
 	t_list		*light;

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 11:57:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 15:22:26 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/10 11:45:15 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	calc_aux_geometry(t_camera *cam, int res_x, int res_y)
 	viewport_x = 2 * tan(cam->fov / 2);
 	viewport_y = viewport_x * res_y / res_x;
 	n = v_normalize(v_scale(cam->orient, -1));
-	u = v_cross_product(v_create(0, 1, 0), n);
-	v = v_cross_product(n, v_scale(u, -1));
+	u = v_cross(v_create(0, -1, 0), n);
+	v = v_cross(n, u);
 	cam->pixel_x = v_scale(u, viewport_x);
 	cam->pixel_y = v_scale(v, viewport_y);
 	cam->img_origin = v_subtract(cam->position, v_scale(cam->pixel_x, 0.5));
@@ -47,12 +47,13 @@ void	raytrace(t_scene *scene, t_ray *ray)
 	t_list					*obj_ptr;
 	static	void (*const	func_ptr[5])(void *, t_ray *) = {
 		// rt_cylinder, rt_plane, rt_sphere, rt_square, rt_triangle};
-		rt_sphere, rt_sphere, rt_sphere, rt_sphere, rt_sphere};
+		rt_sphere, rt_plane, rt_sphere, rt_sphere, rt_sphere};
 
 	obj_ptr = scene->object;
 	while (obj_ptr)
 	{
-		if (*(t_uchar *)(obj_ptr->content) == 2)
+		if (*(t_uchar *)(obj_ptr->content) == 1 ||
+			*(t_uchar *)(obj_ptr->content) == 2)
 			func_ptr[*(t_uchar *)(obj_ptr->content)](obj_ptr->content, ray);
 		obj_ptr = obj_ptr->next;
 	}

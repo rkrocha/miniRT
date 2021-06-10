@@ -6,11 +6,31 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 18:13:06 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 14:04:20 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/10 12:04:18 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	rt_plane(void *object, t_ray *ray)
+{
+	t_plane	*pl;
+	float	denom;
+	float	time;
+
+	pl = (t_plane *)object;
+	denom = v_dot(pl->orient, ray->orient);
+	if (denom > -1e-6 && denom < 1e-6)
+		return ;
+	time = v_dot(v_subtract(pl->position, ray->origin), pl->orient) / denom;
+	if (ray->hit_time > time && time >= 1e-6)
+	{
+		ray->hit_time = time;
+		ray->hit_point = calc_hit_point(ray);
+		//   NORMAL?
+		ray->hit_color = pl->color;
+	}
+}
 
 void	rt_sphere(void *object, t_ray *ray)
 {
@@ -20,9 +40,10 @@ void	rt_sphere(void *object, t_ray *ray)
 
 	sp = (t_sphere *)object;
 	sp_to_origin = v_subtract(ray->origin, sp->position);
-	bhaskara(v_dot_product(ray->orient, ray->orient),
-		2 * v_dot_product(ray->orient, sp_to_origin),
-		v_dot_product(sp_to_origin, sp_to_origin) - pow(sp->diameter, 2) / 4,
+	// bhaskara(v_dot(ray->orient, ray->orient),
+	bhaskara(1,	//  REVIEW
+		2 * v_dot(ray->orient, sp_to_origin),
+		v_dot(sp_to_origin, sp_to_origin) - pow(sp->diameter, 2) / 4,
 		time);
 	arrange_valid_root(time);
 	if (ray->hit_time > time[0] && time[0] >= 0)

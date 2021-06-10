@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 18:13:06 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/10 12:04:18 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/10 13:19:39 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	rt_plane(void *object, t_ray *ray)
 	if (denom > -1e-6 && denom < 1e-6)
 		return ;
 	time = v_dot(v_subtract(pl->position, ray->origin), pl->orient) / denom;
-	if (ray->hit_time > time && time >= 1e-6)
+	if (ray->hit_time > time && time > 0)
 	{
 		ray->hit_time = time;
 		ray->hit_point = calc_hit_point(ray);
@@ -46,7 +46,7 @@ void	rt_sphere(void *object, t_ray *ray)
 		v_dot(sp_to_origin, sp_to_origin) - pow(sp->diameter, 2) / 4,
 		time);
 	arrange_valid_root(time);
-	if (ray->hit_time > time[0] && time[0] >= 0)
+	if (ray->hit_time > time[0] && time[0] > 0)
 	{
 		ray->hit_time = time[0];
 		ray->hit_point = calc_hit_point(ray);

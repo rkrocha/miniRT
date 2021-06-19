@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt_raytracing.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/07 11:57:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/10 11:45:15 by rkochhan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -32,6 +21,11 @@ void	calc_aux_geometry(t_camera *cam, int res_x, int res_y)
 	cam->img_origin = v_subtract(cam->img_origin, n);
 }
 
+t_coord	calc_hit_point(t_ray *ray)
+{
+	return (v_add(ray->origin, v_scale(ray->orient, ray->hit_time)));
+}
+
 void	calc_ray(t_ray *ray, t_camera *cam, float x, float y)
 {
 	ft_bzero(ray, sizeof(t_ray));
@@ -39,27 +33,23 @@ void	calc_ray(t_ray *ray, t_camera *cam, float x, float y)
 	ray->orient = v_add(v_scale(cam->pixel_x, x), v_scale(cam->pixel_y, y));
 	ray->orient = v_add(ray->orient, cam->img_origin);
 	ray->orient = v_normalize(v_subtract(ray->orient, ray->origin));
-	ray->hit_time = 999999; //   CHANGE
+	ray->hit_time = INFINITY; //   CHANGE
 }
 
 void	raytrace(t_scene *scene, t_ray *ray)
 {
-	t_list					*obj_ptr;
-	static	void (*const	func_ptr[5])(void *, t_ray *) = {
+	t_list					*obj;
+	static	bool (*const	func_ptr[5])(void *, t_ray *) = {
 		// rt_cylinder, rt_plane, rt_sphere, rt_square, rt_triangle};
-		rt_sphere, rt_plane, rt_sphere, rt_sphere, rt_sphere};
+		rt_sphere, rt_plane, rt_sphere, rt_square, rt_sphere};
 
-	obj_ptr = scene->object;
-	while (obj_ptr)
+	obj = scene->object;
+	while (obj)
 	{
-		if (*(t_uchar *)(obj_ptr->content) == 1 ||
-			*(t_uchar *)(obj_ptr->content) == 2)
-			func_ptr[*(t_uchar *)(obj_ptr->content)](obj_ptr->content, ray);
-		obj_ptr = obj_ptr->next;
+		if (*(t_uchar *)(obj->content) == 1 ||
+			*(t_uchar *)(obj->content) == 2 ||
+			*(t_uchar *)(obj->content) == 3)
+			func_ptr[*(t_uchar *)(obj->content)](obj->content, ray);
+		obj = obj->next;
 	}
-}
-
-t_coord	calc_hit_point(t_ray *ray)
-{
-	return (v_add(ray->origin, v_scale(ray->orient, ray->hit_time)));
 }

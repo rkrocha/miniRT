@@ -41,14 +41,12 @@ void	raytrace(t_scene *scene, t_ray *ray)
 	t_list					*obj;
 	static	bool (*const	func_ptr[5])(void *, t_ray *) = {
 		// rt_cylinder, rt_plane, rt_sphere, rt_square, rt_triangle};
-		rt_sphere, rt_plane, rt_sphere, rt_square, rt_sphere};
+		rt_sphere, rt_plane, rt_sphere, rt_square, rt_triangle};
 
 	obj = scene->object;
 	while (obj)
 	{
-		if (*(t_uchar *)(obj->content) == 1 ||
-			*(t_uchar *)(obj->content) == 2 ||
-			*(t_uchar *)(obj->content) == 3)
+		if (*(t_uchar *)(obj->content) != 0)
 			func_ptr[*(t_uchar *)(obj->content)](obj->content, ray);
 		obj = obj->next;
 	}

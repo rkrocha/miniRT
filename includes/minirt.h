@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/19 10:12:48 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/19 15:38:52 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	raytrace(t_scene *scene, t_ray *ray);
 bool	rt_plane(void *object, t_ray *ray);
 bool	rt_sphere(void *object, t_ray *ray);
 bool	rt_square(void *object, t_ray *ray);
+bool	rt_triangle(void *object, t_ray *ray);
 
 /*
 ** minirt_raytracing_utils.c:
@@ -63,6 +64,7 @@ bool	rt_square(void *object, t_ray *ray);
 void	bhaskara(float a, float b, float c, float *root);
 void	arrange_valid_root(float *root);
 bool	point_in_square(t_ray *ray, t_square *sq, float time);
+bool	point_in_triangle(t_ray *ray, t_triangle *tr, t_coord norm, float time);
 
 /*
 ** minirt_display.c:

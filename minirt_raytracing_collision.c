@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 18:13:06 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/19 11:06:18 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/06/19 11:13:38 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ bool	rt_square(void *object, t_ray *ray)
 	denom = v_dot(sq->orient, ray->orient);
 	time = v_dot(v_subtract(sq->position, ray->origin), sq->orient) / denom;
 	if ((denom > -FLOAT_EPSILON && denom < FLOAT_EPSILON) ||
-			time > ray->hit_time || time <= 0 ||
+			time > ray->hit_time || time < 0 ||
 			point_in_square(ray, sq, time) == false)
 		return (false);
-	if (ray->hit_time > time && time > 0)
+	else
 	{
 		ray->hit_time = time;
 		ray->hit_point = calc_hit_point(ray);
@@ -84,7 +84,6 @@ bool	rt_square(void *object, t_ray *ray)
 		if (v_dot(ray->orient, sq->orient) > 0)
 			ray->hit_normal = v_scale(ray->hit_normal, -1);
 		ray->hit_color = sq->color;
-		return (true);
 	}
-	return (false);
+	return (true);
 }

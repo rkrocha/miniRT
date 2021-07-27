@@ -9,7 +9,7 @@ void	calc_aux_geometry(t_camera *cam, int res_x, int res_y)
 	t_coord	u;
 	t_coord	v;
 
-	viewport_x = 2 * tan(cam->fov / 2);
+	viewport_x = 2 * tan(cam->fov / 180);
 	viewport_y = viewport_x * res_y / res_x;
 	n = v_normalize(v_scale(cam->orient, -1));
 	u = v_cross(v_create(0, -1, 0), n);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt_raytracing_utils.c                          :+:      :+:    :+:   */
+/*   minirt_raytracing_extra.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:36:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/19 15:39:26 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/07/31 12:10:34 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,11 @@
 void	bhaskara(float a, float b, float c, float *root)
 {
 	float	sqrt_part;
+	float	temp;
 
 	sqrt_part = sqrt(b * b - 4 * a * c);
 	root[0] = (-b - sqrt_part) / (2 * a);
 	root[1] = (-b + sqrt_part) / (2 * a);
-}
-
-void	arrange_valid_root(float *root)
-{
-	float	temp;
-
 	if (root[1] < root[0] && root[1] >= 0)
 	{
 		temp = root[0];
@@ -71,4 +66,51 @@ bool	point_in_triangle(t_ray *ray, t_triangle *tr, t_coord norm, float time)
 			v_subtract(hit, tr->point_c)), norm) > 0)
 		return (true);
 	return (false);
+}
+
+bool	rt_square(void *object, t_ray *ray)
+{
+	t_square	*sq;
+	float		denom;
+	float		time;
+
+	sq = (t_square *)object;
+	denom = v_dot(sq->orient, ray->orient);
+	time = v_dot(v_subtract(sq->position, ray->origin), sq->orient) / denom;
+	if ((denom > -FLOAT_EPSILON && denom < FLOAT_EPSILON) ||
+			time > ray->hit_time || time < FLOAT_EPSILON ||
+			point_in_square(ray, sq, time) == false)
+		return (false);
+	ray->hit_time = time;
+	ray->hit_point = calc_hit_point(ray);
+	ray->hit_normal = sq->orient;
+	if (v_dot(ray->orient, sq->orient) > 0)
+		ray->hit_normal = v_scale(ray->hit_normal, -1);
+	ray->hit_color = sq->color;
+	return (true);
+}
+
+bool	rt_triangle(void *object, t_ray *ray)
+{
+	t_triangle	*tr;
+	t_coord		normal;
+	float		denom;
+	float		time;
+
+	tr = (t_triangle *)object;
+	normal = v_normalize(v_cross(v_subtract(tr->point_b, tr->point_a),
+		v_subtract(tr->point_a, tr->point_c)));
+	denom = v_dot(normal, ray->orient);
+	time = v_dot(v_subtract(tr->point_a, ray->origin), normal) / denom;
+	if ((denom > -FLOAT_EPSILON && denom < FLOAT_EPSILON) ||
+			time > ray->hit_time || time < FLOAT_EPSILON ||
+			point_in_triangle(ray, tr, normal, time) == false)
+		return (false);
+	ray->hit_time = time;
+	ray->hit_point = calc_hit_point(ray);
+	ray->hit_normal = normal;
+	if (v_dot(ray->orient, normal) > 0)
+		ray->hit_normal = v_scale(ray->hit_normal, -1);
+	ray->hit_color = tr->color;
+	return (true);
 }

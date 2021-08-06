@@ -6,14 +6,14 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/17 16:36:21 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:48:23 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_TYPES_H
 # define MINIRT_TYPES_H
 
-# define FLOAT_EPSILON 1e-6
+# define FLOAT_EPSILON 1e-3
 
 # define TYPE_CYLINDER	0
 # define TYPE_PLANE		1

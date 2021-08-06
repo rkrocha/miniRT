@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 18:13:06 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/07/31 20:30:02 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 17:38:42 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ bool	rt_sphere(void *object, t_ray *ray)
 		2 * v_dot(ray->orient, sp_to_origin),
 		v_dot(sp_to_origin, sp_to_origin) - pow(sp->diameter, 2) / 4,
 		time);
-	if (ray->hit_time > time[0] && time[0] > FLOAT_EPSILON)
+	if (ray->hit_time > time[0] && time[0] > -FLOAT_EPSILON)
 	{
 		ray->hit_time = time[0];
 		ray->hit_point = calc_hit_point(ray);

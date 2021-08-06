@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/06 12:35:30 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 17:14:08 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ bool	rt_sphere(void *object, t_ray *ray);
 /*
 ** minirt_raytracing_light.c:
 */
-void	calc_light(t_ray *ray, t_light ambi, t_light light);
-void	calc_shade(t_ray *ray, t_ray *shade, t_light ambi, t_light light);
-void	init_shade(t_ray *ray, t_ray *shade, t_light light);
+void	calc_light(t_ray *ray, t_ray *shade, t_light ambi, t_light light);
 
 /*
 ** minirt_raytracing_extra.c:

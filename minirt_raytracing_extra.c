@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:36:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/06 12:18:23 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 14:44:11 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static bool	point_in_triangle(t_ray *ray, t_triangle *tr, t_coord norm,
 {
 	t_coord	hit;
 
-	if (v_dot(norm, ray->orient) > 0)
-		norm = v_scale(norm, -1);
+	// if (v_dot(norm, ray->orient) > 0)
+	// 	norm = v_scale(norm, -1);
 	hit = v_add(ray->origin, v_scale(ray->orient, time));
 	if (v_dot(v_cross(v_subtract(tr->point_b, tr->point_a),
 			v_subtract(hit, tr->point_a)), norm) > 0 &&
@@ -102,6 +102,8 @@ bool	rt_triangle(void *object, t_ray *ray)
 	tr = (t_triangle *)object;
 	normal = v_normalize(v_cross(v_subtract(tr->point_b, tr->point_a),
 		v_subtract(tr->point_a, tr->point_c)));
+	if (v_dot(ray->orient, normal) > 0)
+		normal = v_scale(normal, -1);
 	denom = v_dot(normal, ray->orient);
 	time = v_dot(v_subtract(tr->point_a, ray->origin), normal) / denom;
 	if ((denom > -FLOAT_EPSILON && denom < FLOAT_EPSILON) ||
@@ -111,8 +113,8 @@ bool	rt_triangle(void *object, t_ray *ray)
 	ray->hit_time = time;
 	ray->hit_point = calc_hit_point(ray);
 	ray->hit_normal = normal;
-	if (v_dot(ray->orient, normal) > 0)
-		ray->hit_normal = v_scale(ray->hit_normal, -1);
+	// if (v_dot(ray->orient, normal) > 0)
+	// 	ray->hit_normal = v_scale(ray->hit_normal, -1);
 	ray->hit_color = tr->color;
 	ray->hit_obj = object;
 	return (true);

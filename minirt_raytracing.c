@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 12:23:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/06 12:35:25 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 17:14:51 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ void	calc_ray(t_ray *ray, t_camera *cam, float x, float y)
 	ray->hit_time = INFINITY; //   CHANGE
 }
 
+static void	init_shade(t_ray *ray, t_ray *shade, t_light light)
+{
+	ft_bzero(shade, sizeof(t_ray));
+	shade->origin = ray->hit_point;
+	shade->orient = v_subtract(light.position, shade->origin);
+	shade->hit_time = v_module(shade->orient);
+	shade->orient = v_normalize(shade->orient);
+}
+
 void	raytrace(t_scene *scene, t_ray *ray)
 {
 	t_list					*obj;
@@ -72,13 +81,11 @@ void	raytrace(t_scene *scene, t_ray *ray)
 	init_shade(ray, &shade, *(t_light *)(scene->light->content));
 	while (obj)
 	{
-		if (*(t_uchar *)(obj->content) != 0 && obj != ray->hit_obj)    // REMOVE
+		if (*(t_uchar *)(obj->content) != 0 || obj != obj->content)
 			func_ptr[*(t_uchar *)(obj->content)](obj->content, &shade);
 		obj = obj->next;
 	}
-	calc_light(ray, scene->ambient, *(t_light *)(scene->light->content));
-	calc_shade(ray, &shade, scene->ambient,
-		*(t_light *)(scene->light->content));
+	calc_light(ray, &shade, scene->ambient, *(t_light *)(scene->light->content));
 }
 
 

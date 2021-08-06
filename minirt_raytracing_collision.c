@@ -6,11 +6,29 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 18:13:06 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/07/31 12:10:44 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/07/31 20:30:02 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+// static void	get_cylinder_roots(void *object, t_ray *ray, float *time)
+// {
+// 	float	a;
+// 	float	b;
+// 	float	c;
+
+// 	a = 
+// }
+
+// bool	rt_cylinder(void *object, t_ray *ray)
+// {
+// 	t_cylinder	*cy;
+// 	float		time[2];
+
+// 	cy = (t_cylinder *)object;
+
+// }
 
 bool	rt_plane(void *object, t_ray *ray)
 {
@@ -31,6 +49,7 @@ bool	rt_plane(void *object, t_ray *ray)
 		if (v_dot(ray->orient, pl->orient) > 0)
 			ray->hit_normal = v_scale(ray->hit_normal, -1);
 		ray->hit_color = pl->color;
+		ray->hit_obj = object;
 		return (true);
 	}
 	return (false);
@@ -57,6 +76,7 @@ bool	rt_sphere(void *object, t_ray *ray)
 		if (v_dot(ray->orient, ray->hit_normal) > 0)
 			ray->hit_normal = v_scale(ray->hit_normal, -1);
 		ray->hit_color = sp->color;
+		ray->hit_obj = object;
 		return (true);
 	}
 	return (false);

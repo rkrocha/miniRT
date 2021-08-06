@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/07/31 12:11:13 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:35:30 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,16 @@ bool	rt_plane(void *object, t_ray *ray);
 bool	rt_sphere(void *object, t_ray *ray);
 
 /*
-** minirt_raytracing_utils.c:
+** minirt_raytracing_light.c:
+*/
+void	calc_light(t_ray *ray, t_light ambi, t_light light);
+void	calc_shade(t_ray *ray, t_ray *shade, t_light ambi, t_light light);
+void	init_shade(t_ray *ray, t_ray *shade, t_light light);
+
+/*
+** minirt_raytracing_extra.c:
 */
 void	bhaskara(float a, float b, float c, float *root);
-bool	point_in_square(t_ray *ray, t_square *sq, float time);
-bool	point_in_triangle(t_ray *ray, t_triangle *tr, t_coord norm, float time);
 bool	rt_square(void *object, t_ray *ray);
 bool	rt_triangle(void *object, t_ray *ray);
 

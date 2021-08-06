@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 12:23:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/07/31 11:55:36 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:35:25 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ void	calc_aux_geometry(t_camera *cam, int res_x, int res_y)
 	viewport_x = 2 * tan(cam->fov / 180);
 	viewport_y = viewport_x * res_y / res_x;
 	n = v_normalize(v_scale(cam->orient, -1));
-	u = v_cross(v_create(0, -1, 0), n);
+	if (fabs(cam->orient.y) > fabs(cam->orient.x) &&
+		fabs(cam->orient.y) > fabs(cam->orient.z))
+		u = v_cross(v_create(-1, 0, 0), n);
+	else
+		u = v_cross(v_create(0, -1, 0), n);
 	v = v_cross(n, u);
 	cam->pixel_x = v_scale(u, viewport_x);
 	cam->pixel_y = v_scale(v, viewport_y);
@@ -47,23 +51,10 @@ void	calc_ray(t_ray *ray, t_camera *cam, float x, float y)
 	ray->hit_time = INFINITY; //   CHANGE
 }
 
-static void	calc_light(t_ray *ray, t_light ambient, t_light light)
-{
-	float	diffuse;
-
-	diffuse = v_dot(v_normalize(
-		v_subtract(light.position, ray->hit_point)), ray->hit_normal);
-	if (diffuse >= 0)
-		ray->hit_color = c_product(
-			ray->hit_color, ambient.ratio + light.ratio * diffuse);
-	else
-		ray->hit_color = c_product(
-			ray->hit_color, ambient.ratio + 0.5 * diffuse);
-}
-
 void	raytrace(t_scene *scene, t_ray *ray)
 {
 	t_list					*obj;
+	t_ray					shade;
 	static	bool (*const	func_ptr[5])(void *, t_ray *) = {
 		//   rt_cylinder, rt_plane, rt_sphere, rt_square, rt_triangle};
 		rt_sphere, rt_plane, rt_sphere, rt_square, rt_triangle};
@@ -75,5 +66,44 @@ void	raytrace(t_scene *scene, t_ray *ray)
 			func_ptr[*(t_uchar *)(obj->content)](obj->content, ray);
 		obj = obj->next;
 	}
+	if (ray->hit_time == INFINITY)
+		return ;
+	obj = scene->object;
+	init_shade(ray, &shade, *(t_light *)(scene->light->content));
+	while (obj)
+	{
+		if (*(t_uchar *)(obj->content) != 0 && obj != ray->hit_obj)    // REMOVE
+			func_ptr[*(t_uchar *)(obj->content)](obj->content, &shade);
+		obj = obj->next;
+	}
 	calc_light(ray, scene->ambient, *(t_light *)(scene->light->content));
+	calc_shade(ray, &shade, scene->ambient,
+		*(t_light *)(scene->light->content));
 }
+
+
+// for each pixel of the screen
+// {
+//  Final color = 0;
+//  Ray = { starting point, direction };
+//  Repeat
+//  {
+//  for each object in the scene
+//  {
+//  determine closest ray object/intersection;
+//  }
+//  if intersection exists
+//  {
+//  for each light in the scene
+//  {
+//  if the light is not in shadow of another object
+//  {
+//  add this light contribution to computed color;
+//  }
+//  }
+//  }
+//  Final color = Final color + computed color * previous reflection factor;
+//  reflection factor = reflection factor * surface reflection property;
+//  increment depth;
+//  } until reflection factor is 0 or maximum depth is reached;
+// } 

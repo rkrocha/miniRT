@@ -6,7 +6,7 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/07/31 12:09:07 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/08/06 10:10:10 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC		= minirt.c \
 		minirt_mlx_hook_functions.c \
 		minirt_raytracing.c \
 		minirt_raytracing_collision.c \
+		minirt_raytracing_light.c \
 		minirt_raytracing_extra.c \
 		minirt_colors.c \
 		minirt_mlx_utils.c \

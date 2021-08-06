@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:36:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/07/31 12:10:34 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/06 12:18:23 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	bhaskara(float a, float b, float c, float *root)
 {
-	float	sqrt_part;
+	float	sqrt_delta;
 	float	temp;
 
-	sqrt_part = sqrt(b * b - 4 * a * c);
-	root[0] = (-b - sqrt_part) / (2 * a);
-	root[1] = (-b + sqrt_part) / (2 * a);
+	sqrt_delta = sqrt(b * b - 4 * a * c);
+	root[0] = (-b - sqrt_delta) / (2 * a);
+	root[1] = (-b + sqrt_delta) / (2 * a);
 	if (root[1] < root[0] && root[1] >= 0)
 	{
 		temp = root[0];
@@ -28,7 +28,7 @@ void	bhaskara(float a, float b, float c, float *root)
 	}
 }
 
-bool	point_in_square(t_ray *ray, t_square *sq, float time)
+static bool	point_in_square(t_ray *ray, t_square *sq, float time)
 {
 	t_coord	n;
 	t_coord	u;
@@ -47,23 +47,6 @@ bool	point_in_square(t_ray *ray, t_square *sq, float time)
 	result.x = u.x * hit.x + v.x * hit.y + n.x * hit.z;
 	result.y = u.y * hit.x + v.y * hit.y + n.y * hit.z;
 	if (fabs(result.x) < (sq->side / 2) && fabs(result.y) < (sq->side / 2))
-		return (true);
-	return (false);
-}
-
-bool	point_in_triangle(t_ray *ray, t_triangle *tr, t_coord norm, float time)
-{
-	t_coord	hit;
-
-	if (v_dot(norm, ray->orient) > 0)
-		norm = v_scale(norm, -1);
-	hit = v_add(ray->origin, v_scale(ray->orient, time));
-	if (v_dot(v_cross(v_subtract(tr->point_b, tr->point_a),
-			v_subtract(hit, tr->point_a)), norm) > 0 &&
-			v_dot(v_cross(v_subtract(tr->point_c, tr->point_b),
-			v_subtract(hit, tr->point_b)), norm) > 0 &&
-			v_dot(v_cross(v_subtract(tr->point_a, tr->point_c),
-			v_subtract(hit, tr->point_c)), norm) > 0)
 		return (true);
 	return (false);
 }
@@ -87,7 +70,26 @@ bool	rt_square(void *object, t_ray *ray)
 	if (v_dot(ray->orient, sq->orient) > 0)
 		ray->hit_normal = v_scale(ray->hit_normal, -1);
 	ray->hit_color = sq->color;
+	ray->hit_obj = object;
 	return (true);
+}
+
+static bool	point_in_triangle(t_ray *ray, t_triangle *tr, t_coord norm,
+	float time)
+{
+	t_coord	hit;
+
+	if (v_dot(norm, ray->orient) > 0)
+		norm = v_scale(norm, -1);
+	hit = v_add(ray->origin, v_scale(ray->orient, time));
+	if (v_dot(v_cross(v_subtract(tr->point_b, tr->point_a),
+			v_subtract(hit, tr->point_a)), norm) > 0 &&
+			v_dot(v_cross(v_subtract(tr->point_c, tr->point_b),
+			v_subtract(hit, tr->point_b)), norm) > 0 &&
+			v_dot(v_cross(v_subtract(tr->point_a, tr->point_c),
+			v_subtract(hit, tr->point_c)), norm) > 0)
+		return (true);
+	return (false);
 }
 
 bool	rt_triangle(void *object, t_ray *ray)
@@ -112,5 +114,6 @@ bool	rt_triangle(void *object, t_ray *ray)
 	if (v_dot(ray->orient, normal) > 0)
 		ray->hit_normal = v_scale(ray->hit_normal, -1);
 	ray->hit_color = tr->color;
+	ray->hit_obj = object;
 	return (true);
 }

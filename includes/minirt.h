@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/06 17:14:08 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/08 16:25:11 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ bool	rt_triangle(void *object, t_ray *ray);
 ** minirt_colors.c:
 */
 int		c_add(int color_a, int color_b);
-int		c_product(int color, float coef);
+int		c_product(int c1, int c2);
+int		c_scale(int color, float coef);
 
 /*
 ** minirt_display.c:

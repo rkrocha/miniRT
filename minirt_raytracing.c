@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 12:23:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/06 17:14:51 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/08 16:33:39 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	raytrace(t_scene *scene, t_ray *ray)
 	init_shade(ray, &shade, *(t_light *)(scene->light->content));
 	while (obj)
 	{
-		if (*(t_uchar *)(obj->content) != 0 || obj != obj->content)
+		if (*(t_uchar *)(obj->content) != 0)
 			func_ptr[*(t_uchar *)(obj->content)](obj->content, &shade);
 		obj = obj->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 12:23:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/08 16:33:39 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/08 20:14:14 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	calc_aux_geometry(t_camera *cam, int res_x, int res_y)
 	viewport_x = 2 * tan(cam->fov / 180);
 	viewport_y = viewport_x * res_y / res_x;
 	n = v_normalize(v_scale(cam->orient, -1));
-	if (fabs(cam->orient.y) > fabs(cam->orient.x) &&
+	if (fabs(cam->orient.y) > fabs(cam->orient.x) && //   check this
 		fabs(cam->orient.y) > fabs(cam->orient.z))
 		u = v_cross(v_create(-1, 0, 0), n);
 	else
@@ -65,14 +65,12 @@ void	raytrace(t_scene *scene, t_ray *ray)
 	t_list					*obj;
 	t_ray					shade;
 	static	bool (*const	func_ptr[5])(void *, t_ray *) = {
-		//   rt_cylinder, rt_plane, rt_sphere, rt_square, rt_triangle};
-		rt_sphere, rt_plane, rt_sphere, rt_square, rt_triangle};
+		rt_cylinder, rt_plane, rt_sphere};
 
 	obj = scene->object;
 	while (obj)
 	{
-		if (*(t_uchar *)(obj->content) != 0)    // REMOVE
-			func_ptr[*(t_uchar *)(obj->content)](obj->content, ray);
+		func_ptr[*(t_uchar *)(obj->content)](obj->content, ray);
 		obj = obj->next;
 	}
 	if (ray->hit_time == INFINITY)
@@ -81,8 +79,7 @@ void	raytrace(t_scene *scene, t_ray *ray)
 	init_shade(ray, &shade, *(t_light *)(scene->light->content));
 	while (obj)
 	{
-		if (*(t_uchar *)(obj->content) != 0)
-			func_ptr[*(t_uchar *)(obj->content)](obj->content, &shade);
+		func_ptr[*(t_uchar *)(obj->content)](obj->content, &shade);
 		obj = obj->next;
 	}
 	calc_light(ray, &shade, scene->ambient, *(t_light *)(scene->light->content));

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 18:13:06 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 01:54:46 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:03:08 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ static float	cy_calc(t_ray ray, t_cylinder cy, float *y, bool ret[2])
 	float	time[2];
 	float	dist[2];
 
-	v[0] = v_subtract(ray.orient, v_scale(
-		cy.orient, v_dot(ray.orient, cy.orient)));
-	v[1] = v_subtract(v_subtract(ray.origin, cy.position), v_scale(
-		cy.orient, v_dot(v_subtract(ray.origin, cy.position), cy.orient)));
+	v[0] = v_sub(ray.orient, v_scale(
+				cy.orient, v_dot(ray.orient, cy.orient)));
+	v[1] = v_sub(v_sub(ray.origin, cy.position), v_scale(
+				cy.orient, v_dot(v_sub(ray.origin, cy.position), cy.orient)));
 	bhaskara(v_dot(v[0], v[0]), 2 * v_dot(v[0], v[1]),
-				v_dot(v[1], v[1]) - pow(cy.diameter / 2, 2), time);
-	v_cy2ray = v_subtract(cy.position, ray.origin);
-	dist[0] = v_dot(cy.orient, v_subtract(v_scale(
-		ray.orient, time[0]), v_cy2ray));
-	dist[1] = v_dot(cy.orient, v_subtract(
-		v_scale(ray.orient, time[1]), v_cy2ray));
+		v_dot(v[1], v[1]) - pow(cy.diameter / 2, 2), time);
+	v_cy2ray = v_sub(cy.position, ray.origin);
+	dist[0] = v_dot(cy.orient, v_sub(v_scale(
+					ray.orient, time[0]), v_cy2ray));
+	dist[1] = v_dot(cy.orient, v_sub(
+				v_scale(ray.orient, time[1]), v_cy2ray));
 	ret[0] = (dist[0] >= 0 && dist[0] <= cy.height && time[0] > FLOAT_EPSILON);
 	ret[1] = (dist[1] >= 0 && dist[1] <= cy.height && time[1] > FLOAT_EPSILON);
 	if (ret[0] == false & ret[1] == true)
@@ -70,8 +70,8 @@ void	rt_cylinder(void *object, t_ray *ray)
 	{
 		ray->hit_time = time;
 		ray->hit_point = calc_hit_point(ray);
-		ray->hit_normal = v_normalize(v_subtract(ray->hit_point,
-			v_add(v_scale(cy->orient, y), cy->position)));
+		ray->hit_normal = v_normalize(v_sub(ray->hit_point,
+					v_add(v_scale(cy->orient, y), cy->position)));
 		if (ret[0] == false & ret[1] == true)
 			ray->hit_normal = v_scale(ray->hit_normal, -1);
 		ray->hit_color = cy->color;
@@ -89,7 +89,7 @@ void	rt_plane(void *object, t_ray *ray)
 	denom = v_dot(pl->orient, ray->orient);
 	if (denom > -FLOAT_EPSILON && denom < FLOAT_EPSILON)
 		return ;
-	time = v_dot(v_subtract(pl->position, ray->origin), pl->orient) / denom;
+	time = v_dot(v_sub(pl->position, ray->origin), pl->orient) / denom;
 	if (ray->hit_time > time && time > FLOAT_EPSILON)
 	{
 		ray->hit_time = time;
@@ -109,7 +109,7 @@ void	rt_sphere(void *object, t_ray *ray)
 	float		time[2];
 
 	sp = (t_sphere *)object;
-	sp_to_origin = v_subtract(ray->origin, sp->position);
+	sp_to_origin = v_sub(ray->origin, sp->position);
 	bhaskara(1, 2 * v_dot(ray->orient, sp_to_origin),
 		v_dot(sp_to_origin, sp_to_origin) - pow(sp->diameter, 2) / 4,
 		time);
@@ -117,7 +117,7 @@ void	rt_sphere(void *object, t_ray *ray)
 	{
 		ray->hit_time = time[0];
 		ray->hit_point = calc_hit_point(ray);
-		ray->hit_normal = v_normalize(v_subtract(ray->hit_point, sp->position));
+		ray->hit_normal = v_normalize(v_sub(ray->hit_point, sp->position));
 		if (v_dot(ray->orient, ray->hit_normal) > 0)
 			ray->hit_normal = v_scale(ray->hit_normal, -1);
 		ray->hit_color = sp->color;

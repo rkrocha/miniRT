@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:08:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 01:54:07 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:15:26 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	run_mlx(t_scene *scene)
 
 	ft_bzero(&mlx, sizeof(mlx));
 	mlx.ptr = mlx_init();
+	if (mlx.ptr == NULL)
+		close_window(&mlx);
 	mlx.scene = scene;
 	mlx.active_cam = scene->camera;
 	check_adjust_window_resolution(&mlx, scene);
@@ -77,5 +79,3 @@ int	main(int argc, const char **argv)
 		print_minirt_usage();
 	return (0);
 }
-
-// 	reorganize main to avoid duplicate function calls

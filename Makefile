@@ -6,7 +6,7 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/08/09 01:55:40 by rkochhan         ###   ########.fr        #
+#    Updated: 2021/08/09 02:19:32 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,6 @@ SRC		= minirt.c \
 		minirt_parse_elements.c \
 		minirt_parse_objects.c \
 		minirt_parse_utils.c \
-		minirt_debug_elements.c \
-		minirt_debug_objects.c \
 		minirt_error.c \
 		get_next_line.c
 

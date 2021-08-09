@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:57:03 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 01:53:07 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:45:36 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # include "libvector.h"
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	t_coord	origin;
 	t_coord	orient;

@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:50:16 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/04/19 16:50:30 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:23:20 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	parse_cylinder(char *line, t_list **object, bool *error, int line_num)
 	parse_rgb(&new_cylinder->color, str_array[5], error, line_num);
 	ft_lstadd_back(object, ft_lstnew(new_cylinder));
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_cylinder(line, *new_cylinder, line_num);
 }
 
 void	parse_plane(char *line, t_list **object, bool *error, int line_num)
@@ -63,8 +61,6 @@ void	parse_plane(char *line, t_list **object, bool *error, int line_num)
 	parse_rgb(&new_plane->color, str_array[3], error, line_num);
 	ft_lstadd_back(object, ft_lstnew(new_plane));
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_plane(line, *new_plane, line_num);
 }
 
 void	parse_sphere(char *line, t_list **object, bool *error, int line_num)
@@ -92,8 +88,6 @@ void	parse_sphere(char *line, t_list **object, bool *error, int line_num)
 	parse_rgb(&new_sphere->color, str_array[3], error, line_num);
 	ft_lstadd_back(object, ft_lstnew(new_sphere));
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_sphere(line, *new_sphere, line_num);
 }
 
 void	parse_square(char *line, t_list **object, bool *error, int line_num)
@@ -122,8 +116,6 @@ void	parse_square(char *line, t_list **object, bool *error, int line_num)
 	parse_rgb(&new_square->color, str_array[4], error, line_num);
 	ft_lstadd_back(object, ft_lstnew(new_square));
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_square(line, *new_square, line_num);
 }
 
 void	parse_triangle(char *line, t_list **object, bool *error, int line_num)
@@ -147,6 +139,4 @@ void	parse_triangle(char *line, t_list **object, bool *error, int line_num)
 	parse_rgb(&new_triangle->color, str_array[4], error, line_num);
 	ft_lstadd_back(object, ft_lstnew(new_triangle));
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_triangle(line, *new_triangle, line_num);
 }

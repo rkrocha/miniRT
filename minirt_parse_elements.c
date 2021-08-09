@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 15:29:59 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:34:18 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static void	parse_res(char *line, t_scene *scene, bool *error, int line_num)
 		*error = true;
 	}
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_res(line, *scene, line_num);
 }
 
 static void	parse_ambl(char *line, t_scene *scene, bool *error, int line_num)
@@ -64,8 +62,6 @@ static void	parse_ambl(char *line, t_scene *scene, bool *error, int line_num)
 	parse_rgb(&scene->ambient.color, str_array[2], error, line_num);
 	scene->defined_amblight = true;
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_ambl(line, scene->ambient, line_num);
 }
 
 static void	parse_camera(char *line, t_list **camera, bool *error, int line_num)
@@ -85,15 +81,13 @@ static void	parse_camera(char *line, t_list **camera, bool *error, int line_num)
 	parse_position(&new_cam->position, str_array[1], error, line_num);
 	parse_orient(&new_cam->orient, str_array[2], error, line_num);
 	new_cam->fov = ft_atof(str_array[3]);
-	if (new_cam->fov <= 0 || new_cam->fov > 180)	// check zero condition
+	if (new_cam->fov <= 0 || new_cam->fov > 180)
 	{
 		print_scene_error(SCENE_CAM_FOV, line_num);
 		*error = true;
 	}
 	ft_lstadd_back(camera, ft_lstnew(new_cam));
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_camera(line, *new_cam, line_num);
 }
 
 static void	parse_light(char *line, t_list **light, bool *error, int line_num)
@@ -115,8 +109,6 @@ static void	parse_light(char *line, t_list **light, bool *error, int line_num)
 	parse_rgb(&new_light->color, str_array[3], error, line_num);
 	ft_lstadd_back(light, ft_lstnew(new_light));
 	ft_split_free(&str_array);
-	if (MINIRT_DEBUG)
-		debug_light(line, *new_light, line_num);
 }
 
 void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
@@ -136,10 +128,6 @@ void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
 		parse_plane(line, &scene->object, scene_error, line_num);
 	else if (*line == 's' && *(line + 1) == 'p')
 		parse_sphere(line, &scene->object, scene_error, line_num);
-	else if (*line == 's' && *(line + 1) == 'q')
-		parse_square(line, &scene->object, scene_error, line_num);
-	else if (*line == 't' && *(line + 1) == 'r')
-		parse_triangle(line, &scene->object, scene_error, line_num);
 	else if (*line == 'c')
 		parse_camera(line, &scene->camera, scene_error, line_num);
 	else if (*line == 'l')

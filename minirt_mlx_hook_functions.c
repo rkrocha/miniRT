@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 08:10:48 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/21 15:11:36 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:35:26 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	close_window(t_minilibx *mlx)
 
 int	keyboard_input(int keycode, t_minilibx *mlx)
 {
-	if (keycode == 0xff1b) // 	ESC key. Make key macros?
+	if (keycode == 0xff1b)
 		close_window(mlx);
-	else if (keycode == 0xff09 && mlx->active_cam != NULL) //	Tab
+	else if (keycode == 0xff09 && mlx->active_cam != NULL)
 		display_manager(mlx);
 	return (0);
 }
@@ -37,6 +37,6 @@ int	refresh_display(t_minilibx *mlx)
 	if (mlx->active_cam == NULL)
 		return (-1);
 	mlx_put_image_to_window(mlx->ptr, mlx->window,
-			((t_camera *)mlx->active_cam->content)->image.ptr, 0, 0);
+		((t_camera *)mlx->active_cam->content)->image.ptr, 0, 0);
 	return (0);
 }

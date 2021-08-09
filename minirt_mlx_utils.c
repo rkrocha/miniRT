@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:16:20 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/09 15:29:59 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:37:07 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	create_image(t_minilibx *mlx)
 	aux_image = &((t_camera *)mlx->active_cam->content)->image;
 	aux_image->ptr = mlx_new_image(mlx->ptr,
 			mlx->scene->res_x, mlx->scene->res_y);
-	//   CHECK IMAGE ALLOCATION?
 	aux_image->addr = mlx_get_data_addr(aux_image->ptr,
 			&aux_image->bpp, &aux_image->line_len, &aux_image->endian);
 }
@@ -34,11 +33,6 @@ void	lst_image_destroy(t_minilibx *mlx, t_list *lst)
 			mlx_destroy_image(mlx->ptr, ((t_camera *)lst->content)->image.ptr);
 		lst = lst->next;
 	}
-}
-
-int	color_picker(t_uchar red, t_uchar green, t_uchar blue)
-{
-	return (red << 16 | green << 8 | blue);
 }
 
 void	putpixel_image(t_image *image, int x, int y, int color)

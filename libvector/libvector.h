@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 16:44:55 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/10 11:45:15 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:00:58 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_coord
 ** v_basic.c:
 */
 t_coord	v_create(float x, float y, float z);
-t_coord	v_subtract(t_coord v, t_coord u);
+t_coord	v_sub(t_coord v, t_coord u);
 t_coord	v_add(t_coord v, t_coord u);
 
 /*

@@ -6,17 +6,22 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 15:23:00 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/08 16:24:57 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:37:18 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+int	color_picker(t_uchar red, t_uchar green, t_uchar blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
+
 int	c_add(int color_a, int color_b)
 {
 	int	r;
 	int	g;
-	int b;
+	int	b;
 
 	r = ((color_a >> 0x10) + (color_b >> 0x10)) / 2;
 	g = ((color_a >> 0x08 & 0xFF) + (color_b >> 0x08 & 0xFF)) / 2;
@@ -24,25 +29,25 @@ int	c_add(int color_a, int color_b)
 	return ((r << 16) | (g << 8) | b);
 }
 
-int			c_product(int c1, int c2)
+int	c_product(int color_a, int color_b)
 {
 	int	r;
 	int	g;
 	int	b;
 
-	r = (((float)(c1 >> 0x10) / 0xFF) *
-			((float)(c2 >> 0x10) / 0xFF)) * 0xFF;
-	g = (((float)((c1 >> 0x08) & 0xFF) / 0xFF) *
-			((float)((c2 >> 0x08) & 0xFF) / 0xFF)) * 0xFF;
-	b = (((float)(c1 & 0xFF) / 0xFF) *
-			((float)(c2 & 0xFF) / 0xFF)) * 0xFF;
-	return ((r << 0x10) | (g << 0x08) | b);
+	r = (((float)(color_a >> 0x10) / 0xFF)
+			* ((float)(color_b >> 0x10) / 0xFF)) * 0xFF;
+	g = (((float)((color_a >> 0x08) & 0xFF) / 0xFF)
+			* ((float)((color_b >> 0x08) & 0xFF) / 0xFF)) * 0xFF;
+	b = (((float)(color_a & 0xFF) / 0xFF)
+			* ((float)(color_b & 0xFF) / 0xFF)) * 0xFF;
+	return ((r << 16) | (g << 8) | b);
 }
 
 int	c_scale(int color, float coef)
 {
-	int mask;
-	int r;
+	int	mask;
+	int	r;
 	int	g;
 	int	b;
 

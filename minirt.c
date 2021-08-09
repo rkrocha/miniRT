@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:08:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 02:15:26 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 03:36:18 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	main(int argc, const char **argv)
 {
 	t_scene	scene;
 
-	if (MINIRT_DEBUG)
-		ft_putendl_fd(DEBUG_MODE, 2);
+	if (MINIRT_BONUS)
+		ft_putendl_fd(BONUS_MODE, 2);
 	if (argc == 2)
 	{
 		ft_bzero(&scene, sizeof(t_scene));

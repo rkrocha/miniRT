@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:56:53 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/01 08:58:48 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 03:10:16 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # define SCENE_EXT			"Scene file must use extension .rt"
 
 # define SCENE_FEW_ARGS		"insufficient arguments"
+
+# define SCENE_MANY_CAMS	"More than one camera defined"
+# define SCENE_MANY_LIGHTS	"More than one light defined"
 
 # define SCENE_NO_RES		"Resolution undefined"
 # define SCENE_MULT_RES		"additional resolution setting"
@@ -53,9 +56,9 @@
 # define SCENE_WARN_RES_Y	"Scene y resolution larger than screen! Adjusting"
 
 /*
-** DEBUG MESSAGES:
+** BONUS MESSAGES:
 */
-# define DEBUG_MODE			"\n\033[1;33mMINIRT_DEBUG ON\033[0m\n"
+# define BONUS_MODE			"\n\033[1;33mMINIRT_BONUS ON\033[0m\n"
 
 /*
 ** minirt_error.c:

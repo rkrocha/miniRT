@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 12:23:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 02:03:41 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 02:55:06 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	calc_aux_geometry(t_camera *cam, int res_x, int res_y)
 	n = v_normalize(v_scale(cam->orient, -1));
 	if (fabs(cam->orient.y) > fabs(cam->orient.x)
 		&& fabs(cam->orient.y) > fabs(cam->orient.z))
-		u = v_cross(v_create(-1, 0, 0), n);
+		u = v_cross(v_create(0, 0, -1), n);
 	else
 		u = v_cross(v_create(0, -1, 0), n);
 	v = v_cross(n, u);

@@ -6,16 +6,12 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:41:02 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 02:34:18 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 03:16:29 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/*
-** Multiple definitions of resolution, or resolution values smaller than 1
-** will cause both the line and the scene file to be considered invalid.
-*/
 static void	parse_res(char *line, t_scene *scene, bool *error, int line_num)
 {
 	char	**str_array;
@@ -128,9 +124,9 @@ void	parse_by_type(char *line, t_scene *scene, bool *scene_error)
 		parse_plane(line, &scene->object, scene_error, line_num);
 	else if (*line == 's' && *(line + 1) == 'p')
 		parse_sphere(line, &scene->object, scene_error, line_num);
-	else if (*line == 'c')
+	else if (*line == 'c' || *line == 'C')
 		parse_camera(line, &scene->camera, scene_error, line_num);
-	else if (*line == 'l')
+	else if (*line == 'l' || *line == 'L')
 		parse_light(line, &scene->light, scene_error, line_num);
 	else
 		parse_invalid_element(line, scene_error, line_num);

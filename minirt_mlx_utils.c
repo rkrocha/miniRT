@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 14:16:20 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 02:37:07 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 03:03:17 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,4 @@ void	putpixel_image(t_image *image, int x, int y, int color)
 
 	pixel = image->addr + (y * image->line_len + x * (image->bpp / 8));
 	*(unsigned int *)pixel = color;
-}
-
-void	fill_image(t_minilibx *mlx, int color)
-{
-	t_image	*aux_image;
-	int		x;
-	int		y;
-
-	aux_image = &((t_camera *)mlx->active_cam->content)->image;
-	x = 0;
-	y = 0;
-	while (y <= mlx->scene->res_y)
-	{
-		while (x <= mlx->scene->res_x)
-		{
-			putpixel_image(aux_image, x, y, color);
-			x++;
-		}
-		y++;
-		x = 0;
-	}
 }

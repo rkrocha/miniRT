@@ -6,15 +6,15 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 02:45:55 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 03:21:37 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# ifndef MINIRT_DEBUG
-#  define MINIRT_DEBUG 0
+# ifndef MINIRT_BONUS
+#  define MINIRT_BONUS 0
 # endif
 
 # include <fcntl.h>
@@ -88,7 +88,6 @@ int		refresh_display(t_minilibx *mlx);
 void	create_image(t_minilibx *mlx);
 void	lst_image_destroy(t_minilibx *mlx, t_list *lst);
 void	putpixel_image(t_image *image, int x, int y, int color);
-void	fill_image(t_minilibx *mlx, int color);
 
 /*
 ** minirt_scene.c:

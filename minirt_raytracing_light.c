@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 10:09:37 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 02:00:20 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 11:35:51 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ void	calc_light(t_ray *ray, t_ray *shade, t_light ambi, t_light light)
 	ray->hit_color = c_product(ray->hit_color, ambi.color);
 	diffuse = v_dot(shade->orient, ray->hit_normal);
 	in_shadow = false;
-	if (shade->hit_time < v_module(v_sub(light.position, shade->origin)))
+	if (shade->hit_time < v_module(v_sub(light.position, shade->origin))
+		|| diffuse < 0)
 		in_shadow = true;
-	if (diffuse >= 0 && !in_shadow)
+	if (diffuse >= 0)
 		ray->hit_color = c_scale(ray->hit_color,
 				ambi.ratio + (light.ratio * diffuse * 0.75));
 	else
 		ray->hit_color = c_scale(ray->hit_color,
-				ambi.ratio + (diffuse * 0.25 * in_shadow));
+				ambi.ratio + (diffuse * 0.5 * in_shadow));
 	if (!in_shadow)
 		return ;
 	ray->hit_color = c_scale(ray->hit_color,

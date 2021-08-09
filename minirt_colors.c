@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 15:23:00 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 02:37:18 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 11:33:38 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,6 @@
 int	color_picker(t_uchar red, t_uchar green, t_uchar blue)
 {
 	return (red << 16 | green << 8 | blue);
-}
-
-int	c_add(int color_a, int color_b)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = ((color_a >> 0x10) + (color_b >> 0x10)) / 2;
-	g = ((color_a >> 0x08 & 0xFF) + (color_b >> 0x08 & 0xFF)) / 2;
-	b = ((color_a & 0xFF) + (color_b & 0xFF)) / 2;
-	return ((r << 16) | (g << 8) | b);
 }
 
 int	c_product(int color_a, int color_b)

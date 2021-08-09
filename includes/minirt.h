@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 03:21:37 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 11:33:44 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	calc_light(t_ray *ray, t_ray *shade, t_light ambi, t_light light);
 ** minirt_colors.c:
 */
 int		color_picker(t_uchar red, t_uchar green, t_uchar blue);
-int		c_add(int color_a, int color_b);
 int		c_product(int c1, int c2);
 int		c_scale(int color, float coef);
 

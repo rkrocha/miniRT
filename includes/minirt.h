@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:09:28 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/08 20:13:49 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 01:54:24 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	raytrace(t_scene *scene, t_ray *ray);
 /*
 ** minirt_raytracing_collision.c:
 */
-bool	rt_cylinder(void *object, t_ray *ray);
-bool	rt_plane(void *object, t_ray *ray);
-bool	rt_sphere(void *object, t_ray *ray);
+void	rt_cylinder(void *object, t_ray *ray);
+void	rt_plane(void *object, t_ray *ray);
+void	rt_sphere(void *object, t_ray *ray);
 
 /*
 ** minirt_raytracing_light.c:
@@ -65,7 +65,6 @@ void	calc_light(t_ray *ray, t_ray *shade, t_light ambi, t_light light);
 /*
 ** minirt_raytracing_extra.c:
 */
-void	bhaskara(float a, float b, float c, float *root);
 
 /*
 ** minirt_colors.c:

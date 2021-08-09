@@ -6,11 +6,27 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 18:13:06 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/08 20:08:35 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 01:54:46 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static void	bhaskara(float a, float b, float c, float *root)
+{
+	float	sqrt_delta;
+	float	temp;
+
+	sqrt_delta = sqrt(b * b - 4 * a * c);
+	root[0] = (-b - sqrt_delta) / (2 * a);
+	root[1] = (-b + sqrt_delta) / (2 * a);
+	if (root[1] < root[0] && root[1] >= 0)
+	{
+		temp = root[0];
+		root[0] = root[1];
+		root[1] = temp;
+	}
+}
 
 static float	cy_calc(t_ray ray, t_cylinder cy, float *y, bool ret[2])
 {
@@ -41,7 +57,7 @@ static float	cy_calc(t_ray ray, t_cylinder cy, float *y, bool ret[2])
 	return (time[0]);
 }
 
-bool	rt_cylinder(void *object, t_ray *ray)
+void	rt_cylinder(void *object, t_ray *ray)
 {
 	t_cylinder	*cy;
 	bool		ret[2];
@@ -61,10 +77,9 @@ bool	rt_cylinder(void *object, t_ray *ray)
 		ray->hit_color = cy->color;
 		ray->hit_obj = object;
 	}
-	return (ret[0] || ret[1]);
 }
 
-bool	rt_plane(void *object, t_ray *ray)
+void	rt_plane(void *object, t_ray *ray)
 {
 	t_plane	*pl;
 	float	denom;
@@ -73,7 +88,7 @@ bool	rt_plane(void *object, t_ray *ray)
 	pl = (t_plane *)object;
 	denom = v_dot(pl->orient, ray->orient);
 	if (denom > -FLOAT_EPSILON && denom < FLOAT_EPSILON)
-		return (false);
+		return ;
 	time = v_dot(v_subtract(pl->position, ray->origin), pl->orient) / denom;
 	if (ray->hit_time > time && time > FLOAT_EPSILON)
 	{
@@ -84,12 +99,10 @@ bool	rt_plane(void *object, t_ray *ray)
 			ray->hit_normal = v_scale(ray->hit_normal, -1);
 		ray->hit_color = pl->color;
 		ray->hit_obj = object;
-		return (true);
 	}
-	return (false);
 }
 
-bool	rt_sphere(void *object, t_ray *ray)
+void	rt_sphere(void *object, t_ray *ray)
 {
 	t_sphere	*sp;
 	t_coord		sp_to_origin;
@@ -97,9 +110,7 @@ bool	rt_sphere(void *object, t_ray *ray)
 
 	sp = (t_sphere *)object;
 	sp_to_origin = v_subtract(ray->origin, sp->position);
-	// bhaskara(v_dot(ray->orient, ray->orient),
-	bhaskara(1,	//  REVIEW
-		2 * v_dot(ray->orient, sp_to_origin),
+	bhaskara(1, 2 * v_dot(ray->orient, sp_to_origin),
 		v_dot(sp_to_origin, sp_to_origin) - pow(sp->diameter, 2) / 4,
 		time);
 	if (ray->hit_time > time[0] && time[0] > -FLOAT_EPSILON)
@@ -111,9 +122,5 @@ bool	rt_sphere(void *object, t_ray *ray)
 			ray->hit_normal = v_scale(ray->hit_normal, -1);
 		ray->hit_color = sp->color;
 		ray->hit_obj = object;
-		return (true);
 	}
-	return (false);
 }
-
-/////    MAKE ALL OF THESE UP TO A STANDARD

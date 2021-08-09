@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 08:08:56 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/06/19 15:53:30 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 01:54:07 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	render_image(t_scene *scene, t_camera *cam)
 {
 	int		x;
 	int		y;
-	t_ray	ray; //   REGISTER?
+	t_ray	ray;
 
 	x = 0;
 	y = 0;
@@ -35,7 +35,7 @@ void	render_image(t_scene *scene, t_camera *cam)
 		x = 0;
 		y++;
 	}
-	printf("%s\n\n", "Rendered!"); //	implement progress bar
+	printf("%s\n\n", "Rendered!");
 	cam->image.is_rendered = true;
 }
 
@@ -44,24 +44,20 @@ static void	run_mlx(t_scene *scene)
 	t_minilibx	mlx;
 
 	ft_bzero(&mlx, sizeof(mlx));
-	mlx.ptr = mlx_init(); // 	quit in case of NULL return
+	mlx.ptr = mlx_init();
 	mlx.scene = scene;
 	mlx.active_cam = scene->camera;
 	check_adjust_window_resolution(&mlx, scene);
 	mlx.window = mlx_new_window(mlx.ptr,
 			scene->res_x, scene->res_y, "miniRT");
-
 	if (mlx.active_cam != NULL)
 	{
 		create_image(&mlx);
 		render_image(scene, (t_camera *)(mlx.active_cam->content));
 	}
-
 	mlx_key_hook(mlx.window, keyboard_input, &mlx);
 	mlx_expose_hook(mlx.window, refresh_display, &mlx);
 	mlx_hook(mlx.window, 33, 1L << 17, close_window, &mlx);
-
-
 	mlx_loop(mlx.ptr);
 }
 
@@ -76,14 +72,7 @@ int	main(int argc, const char **argv)
 		ft_bzero(&scene, sizeof(t_scene));
 		parse_scene(argv[1], &scene);
 		run_mlx(&scene);
-		//free_scene(&scene);		// REMOVE
 	}
-	// else if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
-	// {
-	// 	ft_bzero(&scene, sizeof(t_scene));
-	// 	parse_scene(argv[1], &scene);
-	// 	render_to_bmp(scene);
-	// }
 	else
 		print_minirt_usage();
 	return (0);

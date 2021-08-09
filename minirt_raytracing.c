@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 12:23:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/08 20:14:14 by rkochhan         ###   ########.fr       */
+/*   Updated: 2021/08/09 01:53:34 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	calc_ray(t_ray *ray, t_camera *cam, float x, float y)
 	ray->orient = v_add(v_scale(cam->pixel_x, x), v_scale(cam->pixel_y, y));
 	ray->orient = v_add(ray->orient, cam->img_origin);
 	ray->orient = v_normalize(v_subtract(ray->orient, ray->origin));
-	ray->hit_time = INFINITY; //   CHANGE
+	ray->hit_time = INFINITY;
 }
 
 static void	init_shade(t_ray *ray, t_ray *shade, t_light light)
@@ -64,7 +64,7 @@ void	raytrace(t_scene *scene, t_ray *ray)
 {
 	t_list					*obj;
 	t_ray					shade;
-	static	bool (*const	func_ptr[5])(void *, t_ray *) = {
+	static	void (*const	func_ptr[5])(void *, t_ray *) = {
 		rt_cylinder, rt_plane, rt_sphere};
 
 	obj = scene->object;
@@ -82,32 +82,6 @@ void	raytrace(t_scene *scene, t_ray *ray)
 		func_ptr[*(t_uchar *)(obj->content)](obj->content, &shade);
 		obj = obj->next;
 	}
-	calc_light(ray, &shade, scene->ambient, *(t_light *)(scene->light->content));
+	calc_light(ray, &shade, scene->ambient,
+		*(t_light *)(scene->light->content));
 }
-
-
-// for each pixel of the screen
-// {
-//  Final color = 0;
-//  Ray = { starting point, direction };
-//  Repeat
-//  {
-//  for each object in the scene
-//  {
-//  determine closest ray object/intersection;
-//  }
-//  if intersection exists
-//  {
-//  for each light in the scene
-//  {
-//  if the light is not in shadow of another object
-//  {
-//  add this light contribution to computed color;
-//  }
-//  }
-//  }
-//  Final color = Final color + computed color * previous reflection factor;
-//  reflection factor = reflection factor * surface reflection property;
-//  increment depth;
-//  } until reflection factor is 0 or maximum depth is reached;
-// } 

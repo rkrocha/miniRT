@@ -6,7 +6,7 @@
 /*   By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 12:23:11 by rkochhan          #+#    #+#             */
-/*   Updated: 2021/08/09 10:37:12 by rkochhan         ###   ########.fr       */
+/*   Updated: 2022/03/13 09:17:19 by rkochhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static void	init_shade(t_ray *ray, t_ray *shade, t_light light)
 
 void	raytrace(t_scene *scene, t_ray *ray)
 {
-	t_list					*obj;
-	t_ray					shade;
-	static	void (*const	func_ptr[5])(void *, t_ray *) = {
+	t_list				*obj;
+	t_ray				shade;
+	static void (*const	func_ptr[5])(void *, t_ray *) = {
 		rt_cylinder, rt_plane, rt_sphere};
 
 	obj = scene->object;

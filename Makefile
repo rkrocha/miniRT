@@ -6,7 +6,7 @@
 #    By: rkochhan <rkochhan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/17 22:41:47 by rkochhan          #+#    #+#              #
-#    Updated: 2021/08/09 04:01:30 by rkochhan         ###   ########.fr        #
+#    Updated: 2022/03/13 09:09:05 by rkochhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ CC		= clang
 
 CFLAGS	= -Wall -Werror -Wextra
 
-INCLUDE	= -I./includes/ -I$(MLX)
+INCLUDE	= -I./includes/ -I$(MLX) -I$(LIBFT)
 
 LIBS	= -L$(LIBFT) -L$(LIBV) -L$(MLX) -lft -lvector -lm -lXext -lX11 -lmlx
 
@@ -54,16 +54,12 @@ all: $(NAME)
 .c.o:
 	$(CC) $(CFLAGS) -O3 $(INCLUDE) -c $< -o $(<:.c=.o)
 
-bonus:
+bonus: $(OBJ)
 	@ $(CC) $(CFLAGS) -O3 -D MINIRT_BONUS=1 $(INCLUDE) -c $(SRC)
 	@ make -s -C $(LIBFT)
 	@ make -s -C $(LIBV)
 	@ $(CC) $(CFLAGS) -O3 $(OBJ) $(INCLUDE) $(LIBS) -o $(NAME)
 	@ echo "Made $(value NAME) with bonus"
-
-
-mlx:
-	@ git clone git@github.com:rkrocha/mlx_lib.git mlx-linux
 
 clean:
 	@ make -s clean -C $(LIBFT)
@@ -77,4 +73,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus mlx
+.PHONY: all clean fclean re bonus

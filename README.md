@@ -9,10 +9,11 @@
   <p align="center">
     My first RayTracer with miniLibX.
     <br/>
+	<br/>
+	<img src="https://raw.githubusercontent.com/rkrocha/42cursus/master/minirt_screenshot.png" alt="Screenshot">
     <br/>
   </p>
 </p>
-
 
 
 ## About The Project

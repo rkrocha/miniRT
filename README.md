@@ -1,8 +1,6 @@
 <br/>
 <p align="center">
-  <a href="https://github.com/rkrocha/42cursus/blob/master/subjects/04.miniRT.pdf">
-    <img src="https://github.com/rkrocha/42cursus/blob/master/badges/minirte.png" alt="Logo" width="150" height="150">
-  </a>
+  <img src="https://raw.githubusercontent.com/rkrocha/42cursus/main/badges/minirte.png" alt="Logo" width="150" height="150">
 
   <h3 align="center">miniRT</h3>
 

@@ -18,8 +18,6 @@
 
 This project is an introduction to the beautiful world of Raytracing. Once completed you will be able to render simple Computer-Generated-Images and you will never be afraid of implementing mathematical formulas again.
 
-For more information check out this project's [PDF](https://github.com/rkrocha/42cursus/blob/master/subjects/04.miniRT.pdf).
-
 ## Built With
 
 * C

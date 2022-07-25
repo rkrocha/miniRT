@@ -36,7 +36,7 @@ This project is an introduction to the beautiful world of Raytracing. Once compl
 1. Clone the repo
 
 ```sh
-git clone git@github.com:rkrocha/libft.git
+git clone git@github.com:rkrocha/miniRT.git
 ```
 
 2. Compile the program
